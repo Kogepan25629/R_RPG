@@ -25,7 +25,7 @@ namespace R_RPG
             int FPS, FPSCounter;
             long NowTime, Time, FPSCheckTime;
 
-
+            //垂直同期
             DX.SetWaitVSyncFlag(DX.TRUE);
 
             // Window
@@ -70,6 +70,13 @@ namespace R_RPG
             //描写を裏画面に指定
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
+
+
+
+
+
+
+
             //メインループ
             while (DX.ProcessMessage() == 0)
             {
@@ -94,15 +101,13 @@ namespace R_RPG
                     }
                 }
 
-                // 文字列の描画
-                DX.ChangeFontType(DX.DX_FONTTYPE_ANTIALIASING_4X4);
-                DX.DrawString(0, 2, "X座標 : " + PD.Player_X.ToString(), Color_White);
-                DX.DrawString(0, 20, "Y座標 : " + PD.Player_Y.ToString(), Color_White);
-                DX.DrawString(0, 38, "ディメンション : " + PD.Player_Dimension.ToString(), Color_White);
-                DX.DrawString(0, 56, "SPEED : " + CharacterControl.Player_Speed.ToString(), Color_White);
-                DX.DrawString(0, 74, "FPS : " + FPS.ToString(), Color_White);
+                //文字列描画(座標,FPS値等)
+                {
+                    Draw_String(PD, FPS);
+                }
 
-                Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
+
+                //Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
 
 
                 //時間関係
@@ -123,6 +128,7 @@ namespace R_RPG
                 DX.ScreenFlip();
             }
 
+            //ライブラリを終了
             DX.InitGraph();
             DX.DxLib_End();
 
@@ -135,7 +141,7 @@ namespace R_RPG
 
 
 
-
+        //Draw_Map
         static void Draw_Map(double Player_X, double Player_Y, byte[,] Map_0, byte[,] Map_1)
         {
 
@@ -231,6 +237,18 @@ namespace R_RPG
                 }
                 Player_Y_Map_D += 1;
             }
+        }
+
+        //Draw_String
+        static void Draw_String(Player_Data PD, int FPS)
+        {
+            // 文字列の描画
+            DX.ChangeFontType(DX.DX_FONTTYPE_ANTIALIASING_4X4);
+            DX.DrawString(0, 2, "X座標 : " + PD.Player_X.ToString(), Color_White);
+            DX.DrawString(0, 20, "Y座標 : " + PD.Player_Y.ToString(), Color_White);
+            DX.DrawString(0, 38, "ディメンション : " + PD.Player_Dimension.ToString(), Color_White);
+            DX.DrawString(0, 56, "SPEED : " + CharacterControl.Player_Speed.ToString(), Color_White);
+            DX.DrawString(0, 74, "FPS : " + FPS.ToString(), Color_White);
         }
     }
 }
