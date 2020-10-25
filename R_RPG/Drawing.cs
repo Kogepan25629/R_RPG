@@ -51,10 +51,10 @@ namespace R_RPG
             {
                 return;
             }
+
             //テクスチャ読み込み
-            {
-                Tile_Data.TileData();
-            }
+            Tile_Data.TileData();
+
             //Player_Data読み込み
             Player_Data_Load.PDL();                 //プレイヤーのデータを読み込む(Player_Dataに)
             Player_Data PD = new Player_Data();     //Player_Dataのインスタンス化
@@ -107,7 +107,7 @@ namespace R_RPG
                 }
 
 
-                Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
+                //Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
 
 
                 //時間関係
