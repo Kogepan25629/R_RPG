@@ -10,12 +10,10 @@ namespace R_RPG
     class CharacterControl
     {
 
-        byte[] keyState = new byte[256];
-        public static double Player_Speed;
         static public void Player_Control()
         {
             {
-                double Player_X, Player_Y;
+                double Player_X, Player_Y, Player_Speed, Player_Now_Speed;
                 int Player_Dimension;
                 // キーボード押下状態を保存するバッファの宣言
                 byte[] keyStateBuf = new byte[256];
@@ -36,16 +34,17 @@ namespace R_RPG
                 switch (keyStateBuf[DX.KEY_INPUT_LSHIFT])
                 {
                     case 1:
-                        Player_Speed = Player_Speed * 3;
+                        Player_Now_Speed = Player_Speed * 3;
                         break;
                     default:
+                        Player_Now_Speed = Player_Speed;
                         break;
                 }
                 //W
                 switch (keyStateBuf[DX.KEY_INPUT_W])
                 {
                     case 1:
-                        Player_Y -= Player_Speed * Drawing.DeltaTime;
+                        Player_Y -= Player_Now_Speed * Drawing.DeltaTime;
                         if (Player_Y <= 0)
                         {
                             Player_Y = 0;
@@ -59,7 +58,7 @@ namespace R_RPG
                 switch (keyStateBuf[DX.KEY_INPUT_S])
                 {
                     case 1:
-                        Player_Y += Player_Speed * Drawing.DeltaTime;
+                        Player_Y += Player_Now_Speed * Drawing.DeltaTime;
                         if(Player_Y >= (Map_Main.GetLength(0) - 1))
                         {
                             Player_Y = (Map_Main.GetLength(0) - 1);
@@ -72,7 +71,7 @@ namespace R_RPG
                 switch (keyStateBuf[DX.KEY_INPUT_A])
                 {
                     case 1:
-                        Player_X -= Player_Speed * Drawing.DeltaTime;
+                        Player_X -= Player_Now_Speed * Drawing.DeltaTime;
                         if (Player_X <= 0)
                         {
                             Player_X = 0;
@@ -85,7 +84,7 @@ namespace R_RPG
                 switch (keyStateBuf[DX.KEY_INPUT_D])
                 {
                     case 1:
-                        Player_X += Player_Speed * Drawing.DeltaTime;
+                        Player_X += Player_Now_Speed * Drawing.DeltaTime;
                         if (Player_X >= (Map_Main.GetLength(1) - 1))
                         {
                             Player_X = (Map_Main.GetLength(1) - 1);
@@ -109,6 +108,7 @@ namespace R_RPG
                 PD.Player_Dimension = Player_Dimension;
                 PD.Player_X = Player_X;
                 PD.Player_Y = Player_Y;
+                PD.Player_Now_Speed = Player_Now_Speed;
             }
         }
     }
