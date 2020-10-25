@@ -56,8 +56,8 @@ namespace R_RPG
                 Tile_Data.TileData();
             }
             //Player_Data読み込み
-            Player_Data_Load.PDL();
-            Player_Data PD = new Player_Data();
+            Player_Data_Load.PDL();                 //プレイヤーのデータを読み込む(Player_Dataに)
+            Player_Data PD = new Player_Data();     //Player_Dataのインスタンス化
 
             //FPS計測関係の初期化
             {
@@ -107,7 +107,7 @@ namespace R_RPG
                 }
 
 
-                //Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
+                Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
 
 
                 //時間関係
@@ -144,7 +144,7 @@ namespace R_RPG
         //Draw_Map
         static void Draw_Map(double Player_X, double Player_Y, byte[,] Map_0, byte[,] Map_1)
         {
-
+            //ローカル関数の宣言
             int INT_Player_X, INT_Player_Y;
             int Tile_Number_X, Tile_Number_Y;
             int Player_X_Map, Player_Y_Map;
@@ -247,7 +247,7 @@ namespace R_RPG
             DX.DrawString(0, 2, "X座標 : " + PD.Player_X.ToString(), Color_White);
             DX.DrawString(0, 20, "Y座標 : " + PD.Player_Y.ToString(), Color_White);
             DX.DrawString(0, 38, "ディメンション : " + PD.Player_Dimension.ToString(), Color_White);
-            DX.DrawString(0, 56, "SPEED : " + CharacterControl.Player_Speed.ToString(), Color_White);
+            DX.DrawString(0, 56, "SPEED : " + PD.Player_Now_Speed.ToString(), Color_White);
             DX.DrawString(0, 74, "FPS : " + FPS.ToString(), Color_White);
         }
     }
