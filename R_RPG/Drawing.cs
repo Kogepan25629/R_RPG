@@ -97,7 +97,7 @@ namespace R_RPG
 
                     //プレイヤー描画
                     {
-                        DX.DrawExtendGraph(Window_Width / 2 - (Setting_TileSize / 2), Window_Heigt / 2 - (Setting_TileSize / 2), Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data_Base.TextureData[3], DX.TRUE);
+                        DX.DrawExtendGraph(Window_Width / 2 - (Setting_TileSize / 2), Window_Heigt / 2 - (Setting_TileSize / 2), Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data.TextureData[3], DX.TRUE);
                     }
                 }
 
@@ -208,7 +208,7 @@ namespace R_RPG
                         int DrawX = ((Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
                         if (Player_X_Map_D >= 0 && Player_X_Map_D < Map_0.GetLength(1))
                         {
-                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data_Base.TextureData[Map_0[Player_Y_Map_D, Player_X_Map_D]], DX.FALSE);
+                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TextureData[Map_0[Player_Y_Map_D, Player_X_Map_D]], DX.FALSE);
                         }
                         Player_X_Map_D += 1;
                     }
@@ -230,7 +230,7 @@ namespace R_RPG
                         int DrawX = ((Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
                         if (Player_X_Map_D >= 0 && Player_X_Map_D < Map_1.GetLength(1))
                         {
-                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data_Base.TextureData[Map_1[Player_Y_Map_D, Player_X_Map_D]], DX.TRUE);
+                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TextureData[Map_1[Player_Y_Map_D, Player_X_Map_D]], DX.TRUE);
                         }
                         Player_X_Map_D += 1;
                     }
