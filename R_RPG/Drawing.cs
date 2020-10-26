@@ -25,10 +25,12 @@ namespace R_RPG
             int FPS, FPSCounter;
             long NowTime, Time, FPSCheckTime;
 
+            /*
+
             //垂直同期
             DX.SetWaitVSyncFlag(DX.TRUE);
 
-            // Window
+            // Window or FullScreen
             if (Setting_ChangeWindowMode == false)
             {
                 int tekitou;
@@ -51,6 +53,10 @@ namespace R_RPG
             {
                 return;
             }
+
+            */
+            Window_Width = Dxlib_Ins.Window_Width;
+            Window_Heigt = Dxlib_Ins.Window_Heigt;
 
             //テクスチャ読み込み
             Tile_Data.TileData();
@@ -107,7 +113,7 @@ namespace R_RPG
                 }
 
 
-                //Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
+                ////Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
 
 
                 //時間関係

@@ -60,10 +60,15 @@
     <Compile Include="CharacterControl.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Drawing.cs" />
+    <Compile Include="Dxlib_Ins.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DxDLLW.cs" />
     <Compile Include="Map_Data.cs" />
     <Compile Include="Player_Data.cs" />
+    <Compile Include="Scene\Scene_Control.cs" />
+    <Compile Include="Scene\S_Main\Draw_S_Main.cs" />
+    <Compile Include="Scene\S_Main\Main_S_Main.cs" />
+    <Compile Include="Scene\S_Menu\Main_S_Menu.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="Tile_Data.cs" />
   </ItemGroup>
@@ -79,5 +84,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

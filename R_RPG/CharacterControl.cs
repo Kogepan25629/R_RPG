@@ -19,6 +19,8 @@ namespace R_RPG
                 byte[] keyStateBuf = new byte[256];
                 //X,Y
                 Player_Data PD = new Player_Data();
+
+                //Player_Dataの内容を代入
                 Player_X = PD.Player_X;
                 Player_Y = PD.Player_Y;
                 Player_Dimension = PD.Player_Dimension;
@@ -105,9 +107,9 @@ namespace R_RPG
                 }
 
                 //変更された座標等を代入
-                PD.Player_Dimension = Player_Dimension;
                 PD.Player_X = Player_X;
                 PD.Player_Y = Player_Y;
+                PD.Player_Dimension = Player_Dimension;
                 PD.Player_Now_Speed = Player_Now_Speed;
             }
         }
