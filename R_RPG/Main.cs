@@ -13,8 +13,8 @@ namespace R_RPG
         [STAThread]
         static void Main()
         {
-            Dxlib_Ins.Dxlib_Initialization();
-            Drawing.Draw_Main();
+            Dxlib_Ins.Dxlib_Initialization();   //Dxlibの初期化
+            Drawing.Draw_Main();                //Main
             //DxLibMain.Main_Test();
         }
     }
