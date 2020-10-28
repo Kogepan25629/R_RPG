@@ -1,149 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using DxLibDLL;
-//クラス
+
+using static R_RPG.Dxlib_Ins;//Window_Width,Window_Width
 using static R_RPG.Setting;
 
-namespace R_RPG
+namespace R_RPG.Scene.S_Game
 {
-    public class Drawing
+    class Draw_S_Game
     {
-
-        //変数
-        public static double DeltaTime;
-        static int Window_Width, Window_Heigt;
-
+        //カラー
         static uint Color_White = DX.GetColor(255, 255, 255);
 
-        public static void Draw_Main()
+        //メイン描画処理ライン
+        static public void DrawSGame(Player_Data PD,int FPS)
         {
-            //変数
-            int FPS, FPSCounter;
-            long NowTime, Time, FPSCheckTime;
+            //Map ID 判別読み込み
+            byte[,] Map_0 = Map_Data.Map_0_Load(PD.Player_Dimension);   //レイヤー0
+            byte[,] Map_1 = Map_Data.Map_1_Load(PD.Player_Dimension);   //レイヤー1
 
-            /*
+            // 画面を消す
+            DX.ClearDrawScreen();
 
-            //垂直同期
-            DX.SetWaitVSyncFlag(DX.TRUE);
-
-            // Window or FullScreen
-            if (Setting_ChangeWindowMode == false)
+            //画像描画
             {
-                int tekitou;
-                DX.GetDefaultState(out Window_Width, out Window_Heigt, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou);
-                DX.SetGraphMode(Window_Width, Window_Heigt, 32);
-                DX.SetFullScreenResolutionMode(DX.DX_FSRESOLUTIONMODE_DESKTOP);
-                DX.ChangeWindowMode(DX.FALSE);
-                //Window_Width = 1920; Window_Heigt = 1080;
-            }
-            else
-            {
-                DX.SetGraphMode(Setting_Window_Width, Setting_Window_Heigt, 32);
-                DX.ChangeWindowMode(DX.TRUE);
-                Window_Width = Setting_Window_Width; Window_Heigt = Setting_Window_Heigt;
-            }
-            // window のサイズ変更の可不可
-            DX.SetWindowSizeChangeEnableFlag(DX.FALSE);
-            //DxLib初期化
-            if (DX.DxLib_Init() == -1)
-            {
-                return;
-            }
+                //マップ描画
+                Draw_Map(PD.Player_X, PD.Player_Y, Map_0, Map_1);
 
-            */
-            Window_Width = Dxlib_Ins.Window_Width;
-            Window_Heigt = Dxlib_Ins.Window_Heigt;
-
-            //テクスチャ読み込み
-            Tile_Data.TileData();
-
-            //Player_Data読み込み
-            Player_Data_Load.PDL();                 //プレイヤーのデータを読み込む(Player_Dataに)
-            Player_Data PD = new Player_Data();     //Player_Dataのインスタンス化
-
-            //FPS計測関係の初期化
-            {
-                Time = DX.GetNowHiPerformanceCount();
-                FPSCheckTime = DX.GetNowHiPerformanceCount();
-                FPS = 0;
-                FPSCounter = 0;
-            }
-
-            //描写を裏画面に指定
-            DX.SetDrawScreen(DX.DX_SCREEN_BACK);
-
-
-
-
-
-
-
-
-            //メインループ
-            while (DX.ProcessMessage() == 0)
-            {
-                //プレイヤー操作
-                CharacterControl.Player_Control();
-
-                //Map ID 判別読み込み
-                byte[,] Map_0 = Map_Data.Map_0_Load(PD.Player_Dimension);   //レイヤー0
-                byte[,] Map_1 = Map_Data.Map_1_Load(PD.Player_Dimension);   //レイヤー1
-
-                // 画面を消す
-                DX.ClearDrawScreen();
-
-                //画像描画
+                //プレイヤー描画
                 {
-                    //マップ描画
-                    Draw_Map(PD.Player_X, PD.Player_Y, Map_0, Map_1);
-
-                    //プレイヤー描画
-                    {
-                        DX.DrawExtendGraph(Window_Width / 2 - (Setting_TileSize / 2), Window_Heigt / 2 - (Setting_TileSize / 2), Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data.TextureData[3], DX.TRUE);
-                    }
+                    DX.DrawExtendGraph(Window_Width / 2 - (Setting_TileSize / 2), Window_Heigt / 2 - (Setting_TileSize / 2), Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data.TextureData[3], DX.TRUE);
                 }
-
-                //文字列描画(座標,FPS値等)
-                {
-                    Draw_String(PD, FPS);
-                }
-
-
-                ////Console.WriteLine("X:"+PD.Player_X.ToString()+"  Y:"+PD.Player_Y.ToString());
-
-
-                //時間関係
-                NowTime = DX.GetNowHiPerformanceCount();
-                DeltaTime = (NowTime - Time) / 1000000.0;
-                Time = NowTime;
-
-                //FPS計測
-                FPSCounter ++;
-                if (NowTime - FPSCheckTime > 1000000)
-                {
-                    FPS = FPSCounter;
-                    FPSCounter = 0;
-                    FPSCheckTime = NowTime;
-                }
-
-                //裏画面を表画面と交換
-                DX.ScreenFlip();
             }
 
-            //ライブラリを終了
-            DX.InitGraph();
-            DX.DxLib_End();
+            //文字列描画(座標,FPS値等)
+            {
+                Draw_String(PD, FPS);
+            }
 
-
+            //裏画面を表画面と交換
+            DX.ScreenFlip();
         }
-
-
-
-
 
 
 
@@ -256,5 +156,6 @@ namespace R_RPG
             DX.DrawString(0, 56, "SPEED : " + PD.Player_Now_Speed.ToString(), Color_White);
             DX.DrawString(0, 74, "FPS : " + FPS.ToString(), Color_White);
         }
+
     }
 }

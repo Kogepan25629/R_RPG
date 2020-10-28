@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using DxLibDLL;
 
-namespace R_RPG
+namespace R_RPG.Scene.S_Game
 {
-    class Tile_Data
+    public static class Tile_Data
     {
         //配列
         public static int[] TextureData = new int[1024];
         public static bool[] Tile_Collision = new bool[1024];
 
-        static void Tile_Data_Base(int TileId, int GrHandle, bool TileCollision)
+        private static void Tile_Data_Base(int TileId, int GrHandle, bool TileCollision)
         {
             TextureData[TileId] = GrHandle;
             Tile_Collision[TileId] = TileCollision;

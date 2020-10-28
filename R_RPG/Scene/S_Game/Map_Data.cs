@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DxLibDLL;
 
-namespace R_RPG
+namespace R_RPG.Scene.S_Game
 {
     class Map_Data
     {
