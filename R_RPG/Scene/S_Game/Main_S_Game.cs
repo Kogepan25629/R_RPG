@@ -31,6 +31,7 @@ namespace R_RPG.Scene.S_Game
             Player_Data_Load.PDL();                 //プレイヤーのデータを読み込む(Player_Dataに)
             Player_Data PD = new Player_Data();     //Player_Dataのインスタンス化
 
+            ///////////////////////////////////////////
             //メインループ
             while (DX.ProcessMessage() == 0)
             {

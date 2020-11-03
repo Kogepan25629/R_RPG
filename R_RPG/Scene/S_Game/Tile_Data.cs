@@ -7,7 +7,7 @@ using DxLibDLL;
 
 namespace R_RPG.Scene.S_Game
 {
-    public static class Tile_Data
+    class Tile_Data
     {
         //配列
         public static int[] TextureData = new int[1024];
