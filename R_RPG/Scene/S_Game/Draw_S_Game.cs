@@ -155,6 +155,7 @@ namespace R_RPG.Scene.S_Game
             DX.DrawString(0, 38, "ディメンション : " + PD.Player_Dimension.ToString(), Color_White);
             DX.DrawString(0, 56, "SPEED : " + PD.Player_Now_Speed.ToString(), Color_White);
             DX.DrawString(0, 74, "FPS : " + FPS.ToString(), Color_White);
+            DX.DrawString(0, 92, "衝突 : " + CharacterControl.Collision.ToString(), Color_White);
         }
 
     }

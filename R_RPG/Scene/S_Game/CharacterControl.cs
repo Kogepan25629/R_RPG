@@ -9,7 +9,7 @@ namespace R_RPG.Scene.S_Game
 {
     class CharacterControl
     {
-
+        static public int Collision = 0;
         static public void Player_Control(Player_Data PD, double ElapsedTime1F)
         {
             if(Scene_Control.S_Control_N == 1)
@@ -135,8 +135,44 @@ namespace R_RPG.Scene.S_Game
                         Player_Y += 1.0;
                     }
                 }
+
                 //当たり判定
                 {
+                    //衝突したかどうか
+                    if ((int)Player_Y >= Map_0.GetLength(0)-1 || (int)Player_X >= Map_0.GetLength(1)-1)
+                    {
+                        Collision = 1;
+                    }
+                    else if (Tile_Data.Tile_Collision[Map_1[(int)Player_Y, (int)Player_X]] == true || Tile_Data.Tile_Collision[Map_1[(int)Player_Y + 1, (int)Player_X]] == true || Tile_Data.Tile_Collision[Map_1[(int)Player_Y, (int)Player_X + 1]] == true || Tile_Data.Tile_Collision[Map_1[(int)Player_Y + 1, (int)Player_X + 1]] == true)
+                    {
+                        Collision = 1;
+                    }
+                    else
+                    {
+                        Collision = 0;
+                    }
+
+                    //衝突した場合
+                    //X
+                    if (Collision == 1) {
+                        if ((tmp_Player_X > Player_X) && (tmp_Player_X - Player_X > 1))//Xが小さくなった場合
+                        {
+
+                        }
+                        else if ((tmp_Player_X < Player_X) && (Player_X - tmp_Player_X > 1))//Xが大きくなった場合
+                        {
+
+                        }
+                        //Y
+                        if ((tmp_Player_Y > Player_Y) && (tmp_Player_Y - Player_Y > 1))//Yが小さくなった場合
+                        {
+
+                        }
+                        else if ((tmp_Player_Y < Player_Y) && (Player_Y - tmp_Player_Y > 1))//Yが大きくなった場合
+                        {
+
+                        }
+                    }
                 }
 
                 //変更された座標等を代入
