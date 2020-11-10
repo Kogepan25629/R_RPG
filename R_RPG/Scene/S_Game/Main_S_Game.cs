@@ -14,12 +14,12 @@ namespace R_RPG.Scene.S_Game
             ////変数////
             //時間関係
             int FPS, FPSCounter;
-            long NowTime, Time, FPSCheckTime;
-            double DeltaTime;
+            long NowTime, LastTime, FPSCheckTime;//現在の時間, 前回の時間, FPS計算用時間
+            double ElapsedTime1F; //1フレーム経過にかかった時間(秒)
 
             //FPS計測関係の初期化
             {
-                Time = FPSCheckTime = DX.GetNowHiPerformanceCount();
+                LastTime = FPSCheckTime = DX.GetNowHiPerformanceCount();
                 FPS = 0;
                 FPSCounter = 0;
             }
@@ -36,9 +36,9 @@ namespace R_RPG.Scene.S_Game
             while (DX.ProcessMessage() == 0)
             {
                 //時間関係
-                NowTime = DX.GetNowHiPerformanceCount();
-                DeltaTime = (NowTime - Time) / 1000000.0;
-                Time = NowTime;
+                NowTime = DX.GetNowHiPerformanceCount();    //現在の時間を取得
+                ElapsedTime1F = (NowTime - LastTime) / 1000000.0;   //1フレーム経過にかかった時間(秒)
+                LastTime = NowTime;
 
                 //FPS計測
                 FPSCounter++;
@@ -50,7 +50,7 @@ namespace R_RPG.Scene.S_Game
                 }
 
                 //プレイヤー操作
-                CharacterControl.Player_Control(PD, DeltaTime);
+                CharacterControl.Player_Control(PD, ElapsedTime1F);
 
                 //描画
                 Draw_S_Game.DrawSGame(PD,FPS);
