@@ -10,6 +10,10 @@ namespace R_RPG.Scene.S_Game
     class CharacterControl
     {
         static public int Collision = 0;
+
+        //
+        static int tmp_luC_X, tmp_luC_Y, tmp_ruC, tmp_rdC, tmp_ldC;//前回処理時のプレイヤー座標(整数)  left right up down Colision
+
         static public void Player_Control(Player_Data PD, double ElapsedTime1F)
         {
             if(Scene_Control.S_Control_N == 1)
@@ -23,7 +27,7 @@ namespace R_RPG.Scene.S_Game
                 byte[] keyStateBuf = new byte[256];
 
                 //Player_Dataの内容を代入
-                tmp_Player_X = Player_X = PD.Player_X;
+                tmp_Player_X = Player_X = PD.Player_X; //tmp = 移動前座標
                 tmp_Player_Y = Player_Y = PD.Player_Y;
                 Player_Dimension = PD.Player_Dimension;
                 Player_Speed = PD.Player_Speed;
@@ -139,11 +143,7 @@ namespace R_RPG.Scene.S_Game
                 //当たり判定
                 {
                     //衝突したかどうか
-                    if ((int)Player_Y >= Map_0.GetLength(0)-1 || (int)Player_X >= Map_0.GetLength(1)-1)
-                    {
-                        Collision = 1;
-                    }
-                    else if (Tile_Data.Tile_Collision[Map_1[(int)Player_Y, (int)Player_X]] == true || Tile_Data.Tile_Collision[Map_1[(int)Player_Y + 1, (int)Player_X]] == true || Tile_Data.Tile_Collision[Map_1[(int)Player_Y, (int)Player_X + 1]] == true || Tile_Data.Tile_Collision[Map_1[(int)Player_Y + 1, (int)Player_X + 1]] == true)
+                    if (Tile_Data.Tile_Collision[Map_1[(int)Player_Y, (int)Player_X]] == true || Tile_Data.Tile_Collision[Map_1[(int)(Player_Y + 0.999999999999999), (int)Player_X]] == true || Tile_Data.Tile_Collision[Map_1[(int)Player_Y, (int)(Player_X+0.999999999999999)]] == true || Tile_Data.Tile_Collision[Map_1[(int)(Player_Y + 0.999999999999999), (int)(Player_X + 0.999999999999999)]] == true)
                     {
                         Collision = 1;
                     }
@@ -155,25 +155,32 @@ namespace R_RPG.Scene.S_Game
                     //衝突した場合
                     //X
                     if (Collision == 1) {
-                        if ((tmp_Player_X > Player_X) && (tmp_Player_X - Player_X > 1))//Xが小さくなった場合
+                        if (tmp_Player_X > Player_X && (int)tmp_Player_X != (int)Player_X)//Xが小さくなった場合
                         {
-
+                            Player_X = (int)Player_X + 1;
                         }
-                        else if ((tmp_Player_X < Player_X) && (Player_X - tmp_Player_X > 1))//Xが大きくなった場合
+                        else if (tmp_Player_X < Player_X && (int)(tmp_Player_X - 0.000000000000001) != (int)(Player_X - 0.000000000000001))//Xが大きくなった場合
                         {
-
+                            Player_X = (int)Player_X;
                         }
                         //Y
-                        if ((tmp_Player_Y > Player_Y) && (tmp_Player_Y - Player_Y > 1))//Yが小さくなった場合
+                        if (tmp_Player_Y > Player_Y && (int)tmp_Player_Y != (int)Player_Y)//Yが小さくなった場合
                         {
-
+                            Player_Y = (int)Player_Y + 1;
                         }
-                        else if ((tmp_Player_Y < Player_Y) && (Player_Y - tmp_Player_Y > 1))//Yが大きくなった場合
+                        else if (tmp_Player_Y < Player_Y && (int)(tmp_Player_Y - 0.000000000000001) != (int)(Player_Y) - 0.000000000000001)//Yが大きくなった場合
                         {
-
+                            Player_Y = (int)Player_Y;
                         }
                     }
                 }
+
+                /*tmpに代入
+                tmp_luC_X = (int)Player_X;
+                tmp_luC_Y = (int)Player_Y;
+                tmp_ruC;
+                tmp_rdC;
+                tmp_ldC;*/
 
                 //変更された座標等を代入
                 PD.Player_X = Player_X;
