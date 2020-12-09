@@ -18,10 +18,6 @@ namespace R_RPG.Scene.S_Game
         //メイン描画処理ライン
         static public void DrawSGame(Player_Data PD,int FPS)
         {
-            //Map ID 判別読み込み
-            byte[,] Map_0 = Map_Data.Map_0_Load(PD.Player_Dimension);   //レイヤー0
-            byte[,] Map_1 = Map_Data.Map_1_Load(PD.Player_Dimension);   //レイヤー1
-
             // 画面を消す
             DX.ClearDrawScreen();
 

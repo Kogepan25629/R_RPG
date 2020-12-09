@@ -33,12 +33,6 @@ namespace R_RPG.Scene.S_Game
                 Player_Dimension = PD.Player_Dimension;
                 Player_Speed = PD.Player_Speed;
 
-                //Map ID 判別読み込み
-                /*
-                byte[,] Map_0 = Map_Data.Map_0_Load(PD.Player_Dimension);   //レイヤー0
-                byte[,] Map_1 = Map_Data.Map_1_Load(PD.Player_Dimension);   //レイヤー1
-                */
-
                 // キーボード押下状態の読み込み
                 DX.GetHitKeyStateAll(keyStateBuf);
 
@@ -210,22 +204,22 @@ namespace R_RPG.Scene.S_Game
                     if (Collision == true && /*頂点4点すべて衝突判定の場合は当たり判定無効->*/ disable_collision == false) {
                         //X
                         if (Collision1 == true || Collision3 == true) {
-                            if (tmp_Player_X > Player_X/* && (int)tmp_Player_X != (int)Player_X*/)//Xが小さくなった場合
+                            if (tmp_Player_X > Player_X)//Xが小さくなった場合
                             {
                                 Player_X = (int)Player_X + 1;
                             }
-                            else if (tmp_Player_X < Player_X/* && (int)(tmp_Player_X - 0.000000000000001) != (int)(Player_X - 0.000000000000001)*/)//Xが大きくなった場合
+                            else if (tmp_Player_X < Player_X)//Xが大きくなった場合
                             {
                                 Player_X = (int)Player_X;
                             }
                         }
                         //Y
                         if (Collision2 == true || Collision3 == true) {
-                            if (tmp_Player_Y > Player_Y/* && (int)tmp_Player_Y != (int)Player_Y*/)//Yが小さくなった場合
+                            if (tmp_Player_Y > Player_Y)//Yが小さくなった場合
                             {
                                 Player_Y = (int)Player_Y + 1;
                             }
-                            else if (tmp_Player_Y < Player_Y/* && (int)(tmp_Player_Y - 0.000000000000001) != (int)(Player_Y) - 0.000000000000001*/)//Yが大きくなった場合
+                            else if (tmp_Player_Y < Player_Y)//Yが大きくなった場合
                             {
                                 Player_Y = (int)Player_Y;
                             }
