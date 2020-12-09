@@ -9,7 +9,7 @@ namespace R_RPG
     class Setting
     {
         //Windowモード選択
-        static public bool Setting_ChangeWindowMode =true;    //true:WindowMode   false:FullScreen  Def:treu
+        static public bool Setting_ChangeWindowMode =false;    //true:WindowMode   false:FullScreen  Def:treu
 
         //TileSize
         static public int Setting_TileSize = 32;

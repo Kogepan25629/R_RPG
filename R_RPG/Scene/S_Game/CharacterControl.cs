@@ -191,24 +191,24 @@ namespace R_RPG.Scene.S_Game
                     {
                         disable_collision = true;
                     }
-                    if((disable_collision == true) && ((
-                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][0][(int)Player_Y][(int)Player_X]] == false && 
-                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][0][(int)(Player_Y + 0.99999999999999)][(int)Player_X]] == false && 
-                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][0][(int)Player_Y][(int)(Player_X + 0.99999999999999)]] == false && 
-                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][0][(int)(Player_Y + 0.99999999999999)][(int)(Player_X + 0.99999999999999)]] == false) || (
-                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][1][(int)Player_Y][(int)Player_X]] == false && 
-                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][1][(int)(Player_Y + 0.99999999999999)][(int)Player_X]] == false && 
-                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][1][(int)Player_Y][(int)(Player_X + 0.99999999999999)]] == false && 
-                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][1][(int)(Player_Y + 0.99999999999999)][(int)(Player_X + 0.99999999999999)]] == false)))
+
+                    if (disable_collision == true && ((Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][0][(int)Player_Y][(int)Player_X]] != true &&
+                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][0][(int)(Player_Y + 0.99999999999999)][(int)Player_X]] != true &&
+                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][0][(int)Player_Y][(int)(Player_X + 0.99999999999999)]] != true &&
+                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][0][(int)(Player_Y + 0.99999999999999)][(int)(Player_X + 0.99999999999999)]] != true) && (
+                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][1][(int)Player_Y][(int)Player_X]] != true &&
+                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][1][(int)(Player_Y + 0.99999999999999)][(int)Player_X]] != true &&
+                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][1][(int)Player_Y][(int)(Player_X + 0.99999999999999)]] != true &&
+                        Tile_Data.Tile_Collision[Map_Data.map_data[Player_Dimension][1][(int)(Player_Y + 0.99999999999999)][(int)(Player_X + 0.99999999999999)]] != true)))
                     {
                         disable_collision = false;
                     }
 
 
+                    Console.WriteLine("disable_collison:"+disable_collision.ToString());
                     //衝突した場合
-                    if (Collision == true && /*頂点4点すべて衝突判定の場合は当たり判定無効*/ disable_collision == false) {
+                    if (Collision == true && /*頂点4点すべて衝突判定の場合は当たり判定無効->*/ disable_collision == false) {
                         //X
-                        Console.WriteLine("disable_collison:"+disable_collision.ToString());
                         if (Collision1 == true || Collision3 == true) {
                             if (tmp_Player_X > Player_X/* && (int)tmp_Player_X != (int)Player_X*/)//Xが小さくなった場合
                             {
