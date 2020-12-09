@@ -28,7 +28,7 @@ namespace R_RPG.Scene.S_Game
             //画像描画
             {
                 //マップ描画
-                Draw_Map(PD.Player_X, PD.Player_Y, Map_0, Map_1);
+                Draw_Map(PD.Player_X, PD.Player_Y, Map_Data.map_data, PD.Player_Dimension);
 
                 //プレイヤー描画
                 {
@@ -48,7 +48,7 @@ namespace R_RPG.Scene.S_Game
 
 
         //Draw_Map
-        static void Draw_Map(double Player_X, double Player_Y, byte[,] Map_0, byte[,] Map_1)
+        static void Draw_Map(double Player_X, double Player_Y, int[][][][] map_data, int Player_Dimension)
         {
             //ローカル関数の宣言
             int INT_Player_X, INT_Player_Y;
@@ -105,16 +105,16 @@ namespace R_RPG.Scene.S_Game
             Player_Y_Map_D = Player_Y_Map;
             for (int y = 0; y <= Tile_Number_Y; y++)
             {
-                if (Player_Y_Map_D >= 0 && Player_Y_Map_D < Map_0.GetLength(0))
+                if (Player_Y_Map_D >= 0 && Player_Y_Map_D < map_data[Player_Dimension][0].GetLength(0))
                 {
                     Player_X_Map_D = Player_X_Map;
                     int DrawY = ((Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
                     for (int x = 0; x <= Tile_Number_X; x++)
                     {
                         int DrawX = ((Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
-                        if (Player_X_Map_D >= 0 && Player_X_Map_D < Map_0.GetLength(1))
+                        if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][0][0].GetLength(0))
                         {
-                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TextureData[Map_0[Player_Y_Map_D, Player_X_Map_D]], DX.FALSE);
+                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TextureData[map_data[Player_Dimension][0][Player_Y_Map_D][Player_X_Map_D]], DX.FALSE);
                         }
                         Player_X_Map_D += 1;
                     }
@@ -127,16 +127,16 @@ namespace R_RPG.Scene.S_Game
             Player_Y_Map_D = Player_Y_Map;
             for (int y = 0; y <= Tile_Number_Y; y++)
             {
-                if (Player_Y_Map_D >= 0 && Player_Y_Map_D < Map_1.GetLength(0))
+                if (Player_Y_Map_D >= 0 && Player_Y_Map_D < map_data[Player_Dimension][1].GetLength(0))
                 {
                     Player_X_Map_D = Player_X_Map;
                     int DrawY = ((Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
                     for (int x = 0; x <= Tile_Number_X; x++)
                     {
                         int DrawX = ((Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
-                        if (Player_X_Map_D >= 0 && Player_X_Map_D < Map_1.GetLength(1))
+                        if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][1][0].GetLength(0))
                         {
-                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TextureData[Map_1[Player_Y_Map_D, Player_X_Map_D]], DX.TRUE);
+                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TextureData[map_data[Player_Dimension][1][Player_Y_Map_D][Player_X_Map_D]], DX.TRUE);
                         }
                         Player_X_Map_D += 1;
                     }
@@ -160,6 +160,7 @@ namespace R_RPG.Scene.S_Game
             Console.WriteLine("X座標 : " + PD.Player_X.ToString());
             Console.WriteLine("Y座標 : " + PD.Player_Y.ToString());
             Console.WriteLine("衝突 : " + CharacterControl.Collision.ToString());
+            //Console.WriteLine((int)(25+0.99999999999999));
         }
 
     }
