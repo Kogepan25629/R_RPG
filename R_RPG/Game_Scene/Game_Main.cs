@@ -27,7 +27,8 @@ namespace R_RPG.Game_Scene
             }
 
             //テクスチャ読み込み
-            Tile_Data.TileData();
+            Tile_Data.TileData();   //
+            Graphic_Data.Graphic_Data_Load();
 
             //Player_Data読み込み
             Player_Data_Load.PDL();                 //プレイヤーのデータを読み込む(Player_Dataに)
@@ -40,6 +41,9 @@ namespace R_RPG.Game_Scene
             //メインループ
             while (DX.ProcessMessage() == 0)
             {
+                // 画面を消す
+                DX.ClearDrawScreen();
+
                 //時間関係
                 NowTime = DX.GetNowHiPerformanceCount();    //現在の時間を取得
                 ElapsedTime1F = (NowTime - LastTime) / 1000000.0;   //1フレーム経過にかかった時間(秒)
@@ -54,6 +58,9 @@ namespace R_RPG.Game_Scene
                     FPSCheckTime = NowTime;
                 }
 
+                //描画
+                Game_Draw.GameDrawMain(PD,FPS);
+
                 //操作
                 if (GameControlHandle == "GameMain")
                 {
@@ -64,8 +71,9 @@ namespace R_RPG.Game_Scene
                     Game_Draw.Draw_Esc_Menu();
                 }
 
-                //描画
-                Game_Draw.GameDrawMain(PD,FPS);
+
+                //裏画面を表画面と交換
+                DX.ScreenFlip();
             }
         }
     }

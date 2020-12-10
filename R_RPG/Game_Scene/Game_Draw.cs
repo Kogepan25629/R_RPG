@@ -18,8 +18,6 @@ namespace R_RPG.Game_Scene
         //メイン描画処理ライン
         static public void GameDrawMain(Player_Data PD,int FPS)
         {
-            // 画面を消す
-            DX.ClearDrawScreen();
 
             //画像描画
             {
@@ -28,7 +26,7 @@ namespace R_RPG.Game_Scene
 
                 //プレイヤー描画
                 {
-                    DX.DrawExtendGraph(Window_Width / 2 - (Setting_TileSize / 2), Window_Heigt / 2 - (Setting_TileSize / 2), Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data.TextureData[3], DX.TRUE);
+                    DX.DrawExtendGraph(Window_Width / 2 - (Setting_TileSize / 2), Window_Heigt / 2 - (Setting_TileSize / 2), Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data.TileGraphicData[3], DX.TRUE);
                 }
             }
 
@@ -37,8 +35,6 @@ namespace R_RPG.Game_Scene
                 Draw_String(PD, FPS);
             }
 
-            //裏画面を表画面と交換
-            DX.ScreenFlip();
         }
 
 
@@ -110,7 +106,7 @@ namespace R_RPG.Game_Scene
                         int DrawX = ((Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
                         if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][0][0].GetLength(0))
                         {
-                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TextureData[map_data[Player_Dimension][0][Player_Y_Map_D][Player_X_Map_D]], DX.FALSE);
+                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TileGraphicData[map_data[Player_Dimension][0][Player_Y_Map_D][Player_X_Map_D]], DX.FALSE);
                         }
                         Player_X_Map_D += 1;
                     }
@@ -132,7 +128,7 @@ namespace R_RPG.Game_Scene
                         int DrawX = ((Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
                         if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][1][0].GetLength(0))
                         {
-                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TextureData[map_data[Player_Dimension][1][Player_Y_Map_D][Player_X_Map_D]], DX.TRUE);
+                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TileGraphicData[map_data[Player_Dimension][1][Player_Y_Map_D][Player_X_Map_D]], DX.TRUE);
                         }
                         Player_X_Map_D += 1;
                     }
@@ -162,7 +158,10 @@ namespace R_RPG.Game_Scene
         //Draw_Esc_Menu
         static public void Draw_Esc_Menu()
         {
-
+            DX.SetDrawBright(100, 100, 100);
+            Console.WriteLine("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+            //DX.DrawExtendGraph(0, 0, Window_Width, Window_Heigt, Graphic_Data.GraphicData["Black"], DX.TRUE);
+            //DX.DrawExtendGraph(0, 0, Window_Width, Window_Heigt, Tile_Data.TileGraphicData[3], DX.FALSE);
         }
 
     }
