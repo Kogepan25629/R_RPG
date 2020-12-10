@@ -37,8 +37,8 @@ namespace R_RPG.Game_Scene
                 switch (keyStateBuf[DX.KEY_INPUT_ESCAPE])
                 {
                     case 1:
+                        Game_Main.GameControlHandle = "GameEscMenu";
                         return;
-                        break;
                     default:
                         break;
                 }

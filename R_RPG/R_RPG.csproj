@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Dxlib_Init.cs" />
+    <Compile Include="Graphic_Data.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DxDLLW.cs" />
     <Compile Include="Setting.cs" />

@@ -10,12 +10,12 @@ namespace R_RPG.Game_Scene
     class Tile_Data
     {
         //配列
-        public static int[] TextureData = new int[1024];
+        public static int[] TileGraphicData = new int[1024];
         public static bool[] Tile_Collision = new bool[1024];
 
         private static void Tile_Data_Base(int TileId, int GrHandle, bool TileCollision)
         {
-            TextureData[TileId] = GrHandle;
+            TileGraphicData[TileId] = GrHandle;
             Tile_Collision[TileId] = TileCollision;
         }
         static public void TileData()
