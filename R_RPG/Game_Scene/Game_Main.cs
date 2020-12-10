@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DxLibDLL;
 
-namespace R_RPG.Scene.S_Game
+namespace R_RPG.Game_Scene
 {
-    static class Main_S_Game
+    static class Game_Main
     {
-        static public void MainSGame()
+        //
+        static public string GameControlHandle;
+        static public void GameMain()
         {
             ////変数////
             //時間関係
@@ -31,6 +33,9 @@ namespace R_RPG.Scene.S_Game
             Player_Data_Load.PDL();                 //プレイヤーのデータを読み込む(Player_Dataに)
             Player_Data PD = new Player_Data();     //Player_Dataのインスタンス化
 
+            //コントロール
+            GameControlHandle = "GameMain";
+
             ///////////////////////////////////////////
             //メインループ
             while (DX.ProcessMessage() == 0)
@@ -49,11 +54,18 @@ namespace R_RPG.Scene.S_Game
                     FPSCheckTime = NowTime;
                 }
 
-                //プレイヤー操作
-                CharacterControl.Player_Control(PD, ElapsedTime1F);
+                //操作
+                if (GameControlHandle == "GameMain")
+                {
+                    CharacterControl.Player_Control(PD, ElapsedTime1F);
+                }
+                else if (GameControlHandle == "GameEscMenu")
+                {
+                    Game_Draw.Draw_Esc_Menu();
+                }
 
                 //描画
-                Draw_S_Game.DrawSGame(PD,FPS);
+                Game_Draw.GameDrawMain(PD,FPS);
             }
         }
     }

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace R_RPG.Scene.S_Menu
+namespace R_RPG.Menu_Scene
 {
-    static class Main_S_Menu
+    static class Menu_Main
     {
-        static public void S_Menu()
+        static public void Menu()
         {
-
+            Game_Scene.Game_Main.GameMain();
+            return;
         }
     }
 }

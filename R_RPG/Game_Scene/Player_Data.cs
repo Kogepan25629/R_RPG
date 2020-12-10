@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace R_RPG.Scene.S_Game
+namespace R_RPG.Game_Scene
 {
 
     public class Player_Data

@@ -9,7 +9,7 @@ using static R_RPG.Setting;
 
 namespace R_RPG
 {
-    static class Dxlib_Ins
+    static class Dxlib_Init
     {
         //ウィンドウサイズを格納する変数
         static public int Window_Width, Window_Heigt;
@@ -36,9 +36,9 @@ namespace R_RPG
 
                     DX.SetWindowStyleMode(9);
 
-                    DX.SetGraphMode(Setting_Window_Width, Setting_Window_Heigt, 32);
-                    DX.ChangeWindowMode(DX.TRUE);
                     Window_Width = Setting_Window_Width; Window_Heigt = Setting_Window_Heigt;
+                    DX.SetGraphMode(Window_Width, Window_Heigt, 32);
+                    DX.ChangeWindowMode(DX.TRUE);
 
                     // window のサイズ変更の可不可
                     DX.SetWindowSizeChangeEnableFlag(DX.FALSE);
@@ -53,6 +53,8 @@ namespace R_RPG
 
             //描写を裏画面に指定
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
+
+            DX.SetMouseDispFlag(DX.TRUE);
         }
     }
 }

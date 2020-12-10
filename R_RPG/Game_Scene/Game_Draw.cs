@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using DxLibDLL;
 
-using static R_RPG.Dxlib_Ins;//Window_Width,Window_Width
+using static R_RPG.Dxlib_Init;//Window_Width,Window_Width
 using static R_RPG.Setting;
 
-namespace R_RPG.Scene.S_Game
+namespace R_RPG.Game_Scene
 {
-    class Draw_S_Game
+    class Game_Draw
     {
         //カラー
         static uint Color_White = DX.GetColor(255, 255, 255);
 
         //メイン描画処理ライン
-        static public void DrawSGame(Player_Data PD,int FPS)
+        static public void GameDrawMain(Player_Data PD,int FPS)
         {
             // 画面を消す
             DX.ClearDrawScreen();
@@ -24,7 +24,7 @@ namespace R_RPG.Scene.S_Game
             //画像描画
             {
                 //マップ描画
-                Draw_Map(PD.Player_X, PD.Player_Y, Map_Data.map_data, PD.Player_Dimension);
+                Draw_Map(PD.Player_X, PD.Player_Y, PD.Player_Dimension, Map_Data.map_data);
 
                 //プレイヤー描画
                 {
@@ -44,7 +44,7 @@ namespace R_RPG.Scene.S_Game
 
 
         //Draw_Map
-        static void Draw_Map(double Player_X, double Player_Y, int[][][][] map_data, int Player_Dimension)
+        static void Draw_Map(double Player_X, double Player_Y, int Player_Dimension, int[][][][] map_data)
         {
             //ローカル関数の宣言
             int INT_Player_X, INT_Player_Y;
@@ -157,6 +157,12 @@ namespace R_RPG.Scene.S_Game
             Console.WriteLine("Y座標 : " + PD.Player_Y.ToString());
             Console.WriteLine("衝突 : " + CharacterControl.Collision.ToString());
             //Console.WriteLine((int)(25+0.99999999999999));
+        }
+
+        //Draw_Esc_Menu
+        static public void Draw_Esc_Menu()
+        {
+
         }
 
     }

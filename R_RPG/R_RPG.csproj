@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,10 +26,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,18 +58,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Dxlib_Ins.cs" />
+    <Compile Include="Dxlib_Init.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DxDLLW.cs" />
-    <Compile Include="Scene\Scene_Control.cs" />
-    <Compile Include="Scene\S_Game\CharacterControl.cs" />
-    <Compile Include="Scene\S_Game\Draw_S_Game.cs" />
-    <Compile Include="Scene\S_Game\Main_S_Game.cs" />
-    <Compile Include="Scene\S_Game\Map_Data.cs" />
-    <Compile Include="Scene\S_Game\Player_Data.cs" />
-    <Compile Include="Scene\S_Game\Tile_Data.cs" />
-    <Compile Include="Scene\S_Menu\Main_S_Menu.cs" />
     <Compile Include="Setting.cs" />
+    <Compile Include="Game_Scene\Control\CharacterControl.cs" />
+    <Compile Include="Game_Scene\Game_Draw.cs" />
+    <Compile Include="Game_Scene\Game_Main.cs" />
+    <Compile Include="Game_Scene\Map_Data.cs" />
+    <Compile Include="Game_Scene\Player_Data.cs" />
+    <Compile Include="Game_Scene\Tile_Data.cs" />
+    <Compile Include="Menu\Menu_Main.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
