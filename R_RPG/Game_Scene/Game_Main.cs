@@ -39,11 +39,8 @@ namespace R_RPG.Game_Scene
 
             ///////////////////////////////////////////
             //メインループ
-            while (DX.ProcessMessage() == 0)
+            while (DX.ScreenFlip() == 0 && DX.ProcessMessage() == 0 && DX.ClearDrawScreen() == 0)
             {
-                // 画面を消す
-                DX.ClearDrawScreen();
-
                 //時間関係
                 NowTime = DX.GetNowHiPerformanceCount();    //現在の時間を取得
                 ElapsedTime1F = (NowTime - LastTime) / 1000000.0;   //1フレーム経過にかかった時間(秒)
@@ -58,8 +55,12 @@ namespace R_RPG.Game_Scene
                     FPSCheckTime = NowTime;
                 }
 
+                // キーボード押下状態の読み込み
+                Array.Copy(Key_State.KeyState, Key_State.KeyStateOld, 256);
+                DX.GetHitKeyStateAll(Key_State.KeyState);
+
                 //描画
-                Game_Draw.GameDrawMain(PD,FPS);
+                Game_Draw_Main.GameDrawMain(PD,FPS);
 
                 //操作
                 if (GameControlHandle == "GameMain")
@@ -68,12 +69,10 @@ namespace R_RPG.Game_Scene
                 }
                 else if (GameControlHandle == "GameEscMenu")
                 {
-                    Game_Draw.Draw_Esc_Menu();
+                    C_GameEscMenu.CGameEscMenu();
                 }
 
 
-                //裏画面を表画面と交換
-                DX.ScreenFlip();
             }
         }
     }

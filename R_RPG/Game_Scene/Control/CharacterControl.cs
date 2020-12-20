@@ -21,29 +21,22 @@ namespace R_RPG.Game_Scene
             bool Collision1 = false;
             bool Collision2 = false;
             bool Collision3 = false;
-            // キーボード押下状態を保存するバッファの宣言
-            byte[] keyStateBuf = new byte[256];
             //Player_Dataの内容を代入
             tmp_Player_X = Player_X = PD.Player_X; //tmp = 移動前座標
             tmp_Player_Y = Player_Y = PD.Player_Y;
             Player_Dimension = PD.Player_Dimension;
             Player_Speed = PD.Player_Speed;
-            // キーボード押下状態の読み込み
-            DX.GetHitKeyStateAll(keyStateBuf);
 
             //操作 Math.Floor()
             {
                 //Esc
-                switch (keyStateBuf[DX.KEY_INPUT_ESCAPE])
+                if(Key_State.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && Key_State.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0)
                 {
-                    case 1:
-                        Game_Main.GameControlHandle = "GameEscMenu";
-                        return;
-                    default:
-                        break;
+                    Game_Main.GameControlHandle = "GameEscMenu";
+                    return;
                 }
                 //左シフト
-                switch (keyStateBuf[DX.KEY_INPUT_LSHIFT])
+                switch (Key_State.KeyState[DX.KEY_INPUT_LSHIFT])
                 {
                     case 1:
                         Player_Now_Speed = Player_Speed * 3;
@@ -53,7 +46,7 @@ namespace R_RPG.Game_Scene
                         break;
                 }
                 //W
-                switch (keyStateBuf[DX.KEY_INPUT_W])
+                switch (Key_State.KeyState[DX.KEY_INPUT_W])
                 {
                     case 1:
                         Player_Y -= Player_Now_Speed * ElapsedTime1F;
@@ -62,7 +55,7 @@ namespace R_RPG.Game_Scene
                         break;
                 }
                 //S
-                switch (keyStateBuf[DX.KEY_INPUT_S])
+                switch (Key_State.KeyState[DX.KEY_INPUT_S])
                 {
                     case 1:
                         Player_Y += Player_Now_Speed * ElapsedTime1F;
@@ -71,7 +64,7 @@ namespace R_RPG.Game_Scene
                         break;
                 }
                 //A
-                switch (keyStateBuf[DX.KEY_INPUT_A])
+                switch (Key_State.KeyState[DX.KEY_INPUT_A])
                 {
                     case 1:
                         Player_X -= Player_Now_Speed * ElapsedTime1F;
@@ -80,7 +73,7 @@ namespace R_RPG.Game_Scene
                         break;
                 }
                 //D
-                switch (keyStateBuf[DX.KEY_INPUT_D])
+                switch (Key_State.KeyState[DX.KEY_INPUT_D])
                 {
                     case 1:
                         Player_X += Player_Now_Speed * ElapsedTime1F;
