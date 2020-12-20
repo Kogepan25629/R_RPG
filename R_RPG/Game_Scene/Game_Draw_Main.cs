@@ -10,7 +10,7 @@ using static R_RPG.Setting;
 
 namespace R_RPG.Game_Scene
 {
-    class Game_Draw
+    class Game_Draw_Main
     {
         //カラー
         static uint Color_White = DX.GetColor(255, 255, 255);
@@ -154,15 +154,5 @@ namespace R_RPG.Game_Scene
             Console.WriteLine("衝突 : " + CharacterControl.Collision.ToString());
             //Console.WriteLine((int)(25+0.99999999999999));
         }
-
-        //Draw_Esc_Menu
-        static public void Draw_Esc_Menu()
-        {
-            DX.SetDrawBright(100, 100, 100);
-            Console.WriteLine("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
-            //DX.DrawExtendGraph(0, 0, Window_Width, Window_Heigt, Graphic_Data.GraphicData["Black"], DX.TRUE);
-            //DX.DrawExtendGraph(0, 0, Window_Width, Window_Heigt, Tile_Data.TileGraphicData[3], DX.FALSE);
-        }
-
     }
 }
