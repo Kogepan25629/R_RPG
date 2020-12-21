@@ -58,12 +58,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Class2.cs" />
     <Compile Include="Dxlib_Init.cs" />
     <Compile Include="Game_Scene\Control\C_GameEscMenu.cs" />
     <Compile Include="Game_Scene\Control\Key_State.cs" />
     <Compile Include="Graphic_Data.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="DxDLLW.cs" />
+    <Compile Include="R_UILib.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="Game_Scene\Control\CharacterControl.cs" />
     <Compile Include="Game_Scene\Game_Draw_Main.cs" />
