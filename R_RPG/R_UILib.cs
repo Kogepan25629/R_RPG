@@ -9,12 +9,21 @@ namespace R_UILib
 {
     class R_UI
     {
+        //マウス座標
         private static int  MousePointX;
         private static int  MousePointY;
-        private static int  MouseClickUpPointX;
-        private static int  MouseClickUpPointY;
-        private static int  MouseClickDownPointX;
-        private static int  MouseClickDownPointY;
+        //左クリックした瞬間のマウス座標取得
+        private static int  MouseClickDownLeftPointX;
+        private static int  MouseClickDownLeftPointY;
+        //左クリックを離した瞬間のマウス座標取得
+        private static int  MouseClickUpLeftPointX;
+        private static int  MouseClickUpLeftPointY;
+        //右クリックした瞬間のマウス座標
+        private static int MouseClickDownRightPointX;
+        private static int MouseClickDownRightPointY;
+        //右クリックを離した瞬間のマウス座標
+        private static int MouseClickUpRightPointX;
+        private static int MouseClickUpRightPointY;
         //クリックしている間
         private static bool MouseClickLeft;
         private static bool MouseClickRight;
@@ -28,12 +37,21 @@ namespace R_UILib
         private static bool MouseClickUpLeft;
         private static bool MouseClickUpRight;
 
-        //GetMouseState
+        private static bool ClickUpLeftDetection(int x1, int y1, int x2, int y2)
+        {
+            if (MouseClickUpLeftPointX >= x1 && MouseClickUpLeftPointX <= x2 && MouseClickUpLeftPointY >= y1 && MouseClickUpLeftPointY <= y2 && MouseClickDownLeftPointX >= x1 && MouseClickDownLeftPointX <= x2 && MouseClickDownLeftPointY >= y1 && MouseClickDownLeftPointY <= y2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static void UptadeMouseState()
         {
             OldMouseClickLeft  = MouseClickLeft;
             OldMouseClickRight = MouseClickRight;
-            DX.GetMousePoint(out MousePointX, out MousePointY);
             //クリックしているかどうか判定
             if ((DX.GetMouseInput() & DX.MOUSE_INPUT_LEFT) != 0)
             {
@@ -52,21 +70,21 @@ namespace R_UILib
                 MouseClickRight = false;
             }
             //クリックした瞬間を判定
-            if (OldMouseClickLeft == true && MouseClickLeft == false)
+            if (OldMouseClickLeft == false && MouseClickLeft == true)
             {
-                MouseClickUpLeft = true;
+                MouseClickDownLeft = true;
             }
             else
             {
-                MouseClickUpLeft = false;
+                MouseClickDownLeft = false;
             }
-            if (OldMouseClickRight == true && MouseClickRight == false)
+            if (OldMouseClickRight == false && MouseClickRight == true)
             {
-                MouseClickUpRight = true;
+                MouseClickDownRight = true;
             }
             else
             {
-                MouseClickUpRight = false;
+                MouseClickDownRight = false;
             }
             //クリックを離した瞬間を判定
             if (OldMouseClickLeft == true && MouseClickLeft == false)
@@ -85,24 +103,32 @@ namespace R_UILib
             {
                 MouseClickUpRight = false;
             }
-        }
-
-        private static bool ClickDetection(int x1, int y1, int x2, int y2)
-        {
-            if (MouseClickUpPointX >= x1 && MouseClickUpPointX <= x2 && MouseClickUpPointY >= y1 && MouseClickUpPointY <= y2 && MouseClickDownPointX >= x1 && MouseClickDownPointX <= x2 && MouseClickDownPointY >= y1 && MouseClickDownPointY <= y2)
-            {
-                return true;
+            //マウス座標取得
+            DX.GetMousePoint(out MousePointX, out MousePointY);
+            //左クリックした瞬間のマウス座標取得
+            if (MouseClickDownLeft == true) {
+                DX.GetMousePoint(out MouseClickDownLeftPointX, out MouseClickDownLeftPointY);
             }
-            else
+            //左クリックを離した瞬間のマウス座標取得
+            if (MouseClickUpLeft == true) {
+                DX.GetMousePoint(out MouseClickUpLeftPointX, out MouseClickUpLeftPointY);
+            }
+            //右クリックした瞬間のマウス座標取得
+            if (MouseClickDownRight == true)
             {
-                return false;
+                DX.GetMousePoint(out MouseClickDownRightPointX, out MouseClickDownRightPointY);
+            }
+            //右クリックを離した瞬間のマウス座標取得
+            if (MouseClickUpRight == true)
+            {
+                DX.GetMousePoint(out MouseClickUpRightPointX, out MouseClickUpRightPointY);
             }
         }
 
         public static bool UI_Image(int x1, int y1, int x2, int y2, int grhandle)
         {
             DX.DrawExtendGraph(x1, y2, x2, y2, grhandle, DX.TRUE);
-            if (MousePointX >= x1 && MousePointX <= x2 && MousePointY >= y1 && MousePointY <= y2 && MouseClickLeft == true)
+            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;
             }
@@ -114,7 +140,7 @@ namespace R_UILib
         public static bool UI_String(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color)
         {
             DX.DrawString(x1+(((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2)/*中央揃え*/, y1+(((y2-y1) - DX.GetFontSizeToHandle(fonthandle)) / 2)/*縦中央揃え*/, str, color);
-            if (MousePointX >= x1 && MousePointX <= x2 && MousePointY >= y1 && MousePointY <= y2 && MouseClickLeft == true)
+            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;
             }
@@ -127,7 +153,7 @@ namespace R_UILib
         {
             DX.DrawExtendGraph(x1, y1, x2, y2, grhandle, DX.TRUE);
             DX.DrawString(x1 + (((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2)/*中央揃え*/, y1 + (((y2 - y1) - DX.GetFontSizeToHandle(fonthandle)) / 2)/*縦中央揃え*/, str, color);
-            if (MousePointX >= x1 && MousePointX <= x2 && MousePointY >= y1 && MousePointY <= y2 && MouseClickLeft == true)
+            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;
             }
