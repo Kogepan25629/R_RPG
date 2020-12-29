@@ -137,7 +137,7 @@ namespace R_UILib
                 return false;
             }
         }
-        public static bool UI_String(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color)
+        public static bool UI_StringImage(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color)
         {
             DX.DrawString(x1+(((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2)/*中央揃え*/, y1+(((y2-y1) - DX.GetFontSizeToHandle(fonthandle)) / 2)/*縦中央揃え*/, str, color);
             if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
@@ -149,10 +149,40 @@ namespace R_UILib
                 return false;
             }
         }
-        public static bool UI_String(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color, int grhandle)
+        public static bool UI_StringImage(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color, int grhandle)
         {
             DX.DrawExtendGraph(x1, y1, x2, y2, grhandle, DX.TRUE);
             DX.DrawString(x1 + (((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2)/*中央揃え*/, y1 + (((y2 - y1) - DX.GetFontSizeToHandle(fonthandle)) / 2)/*縦中央揃え*/, str, color);
+            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool UI_String(int x1, int y1, string str, int fonthandle, uint color)
+        {
+            int x2 = x1 + DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle);
+            int y2 = y1 + DX.GetFontSizeToHandle(fonthandle);
+            DX.DrawString(x1, y1, str, color);
+
+            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool UI_String(int x1, int y1, string str, int fonthandle, uint color, int grhandle)
+        {
+            int x2 = x1 + DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle);
+            int y2 = y1 + DX.GetFontSizeToHandle(fonthandle);
+            DX.DrawExtendGraph(x1, y1, x2, y2, grhandle, DX.TRUE);
+            DX.DrawString(x1, y1, str, color);
             if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;

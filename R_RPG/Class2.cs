@@ -54,7 +54,7 @@ namespace R_RPG
             {
                 R_UI.UptadeMouseState();
 
-                if (R_UI.UI_String(100, 100, 200, 160, "おはよう", FontHandle, DX.GetColor(255,255,255), grhandle) == true)
+                if (R_UI.UI_String(0, 0, /*200, 100, */"おはよう", FontHandle, DX.GetColor(255,255,255)/*, grhandle*/) == true)
                 {
                     Console.WriteLine("Clicked");
                 }
