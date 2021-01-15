@@ -7,36 +7,51 @@ using DxLibDLL;
 
 namespace R_UILib
 {
-    class R_UI
+    class RUI_MouseData
     {
         //マウス座標
-        private static int  MousePointX;
-        private static int  MousePointY;
+        protected static int MousePointX;
+        protected static int MousePointY;
         //左クリックした瞬間のマウス座標取得
-        private static int  MouseClickDownLeftPointX;
-        private static int  MouseClickDownLeftPointY;
+        protected static int MouseClickDownLeftPointX;
+        protected static int MouseClickDownLeftPointY;
         //左クリックを離した瞬間のマウス座標取得
-        private static int  MouseClickUpLeftPointX;
-        private static int  MouseClickUpLeftPointY;
+        protected static int MouseClickUpLeftPointX;
+        protected static int MouseClickUpLeftPointY;
         //右クリックした瞬間のマウス座標
-        private static int MouseClickDownRightPointX;
-        private static int MouseClickDownRightPointY;
+        protected static int MouseClickDownRightPointX;
+        protected static int MouseClickDownRightPointY;
         //右クリックを離した瞬間のマウス座標
-        private static int MouseClickUpRightPointX;
-        private static int MouseClickUpRightPointY;
+        protected static int MouseClickUpRightPointX;
+        protected static int MouseClickUpRightPointY;
         //クリックしている間
-        private static bool MouseClickLeft;
-        private static bool MouseClickRight;
+        protected static bool MouseClickLeft;
+        protected static bool MouseClickRight;
         //Oldクリックしている間
-        private static bool OldMouseClickLeft;
-        private static bool OldMouseClickRight;
+        protected static bool OldMouseClickLeft;
+        protected static bool OldMouseClickRight;
         //クリックした瞬間
-        private static bool MouseClickDownLeft;
-        private static bool MouseClickDownRight;
+        protected static bool MouseClickDownLeft;
+        protected static bool MouseClickDownRight;
         //クリックを離した瞬間
-        private static bool MouseClickUpLeft;
-        private static bool MouseClickUpRight;
+        protected static bool MouseClickUpLeft;
+        protected static bool MouseClickUpRight;
 
+        protected static bool ClickUpLeftDetection(int x1, int y1, int x2, int y2)
+        {
+            if (MouseClickUpLeftPointX >= x1 && MouseClickUpLeftPointX <= x2 && MouseClickUpLeftPointY >= y1 && MouseClickUpLeftPointY <= y2 && MouseClickDownLeftPointX >= x1 && MouseClickDownLeftPointX <= x2 && MouseClickDownLeftPointY >= y1 && MouseClickDownLeftPointY <= y2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    class RUI : RUI_MouseData
+    {
+        /*
         private static bool ClickUpLeftDetection(int x1, int y1, int x2, int y2)
         {
             if (MouseClickUpLeftPointX >= x1 && MouseClickUpLeftPointX <= x2 && MouseClickUpLeftPointY >= y1 && MouseClickUpLeftPointY <= y2 && MouseClickDownLeftPointX >= x1 && MouseClickDownLeftPointX <= x2 && MouseClickDownLeftPointY >= y1 && MouseClickDownLeftPointY <= y2)
@@ -48,6 +63,7 @@ namespace R_UILib
                 return false;
             }
         }
+        */
         public static void UptadeMouseState()
         {
             OldMouseClickLeft  = MouseClickLeft;
@@ -196,4 +212,6 @@ namespace R_UILib
         // 1クリックで数回判定される
         // 長押し用も必要
     }
+
+    RUI_Button
 }

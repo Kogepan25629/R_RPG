@@ -48,13 +48,13 @@ namespace R_RPG
             int grhandle = DX.LoadGraph("Texture\\diamond_block.png");
 
 
-
+            RUI lkh = new RUI();
 
             while (DX.ScreenFlip() == 0 && DX.ProcessMessage() == 0 && DX.ClearDrawScreen() == 0)
             {
-                R_UI.UptadeMouseState();
+                RUI.UptadeMouseState();
 
-                if (R_UI.UI_String(0, 0, /*200, 100, */"おはよう", FontHandle, DX.GetColor(255,255,255)/*, grhandle*/) == true)
+                if (RUI.UI_String(0, 0, /*200, 100, */"おはよう", FontHandle, DX.GetColor(255,255,255)/*, grhandle*/) == true)
                 {
                     Console.WriteLine("Clicked");
                 }
