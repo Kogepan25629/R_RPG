@@ -51,7 +51,7 @@ namespace R_UILib
     }
     class RUI : RUI_MouseData
     {
-        /*
+        /*ppp
         private static bool ClickUpLeftDetection(int x1, int y1, int x2, int y2)
         {
             if (MouseClickUpLeftPointX >= x1 && MouseClickUpLeftPointX <= x2 && MouseClickUpLeftPointY >= y1 && MouseClickUpLeftPointY <= y2 && MouseClickDownLeftPointX >= x1 && MouseClickDownLeftPointX <= x2 && MouseClickDownLeftPointY >= y1 && MouseClickDownLeftPointY <= y2)
