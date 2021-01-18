@@ -7,7 +7,7 @@ using DxLibDLL;
 
 namespace R_UILib
 {
-    class RUI_MouseData
+    abstract public class RUI_MouseData
     {
         //マウス座標
         protected static int MousePointX { get; private set; }
@@ -133,9 +133,9 @@ namespace R_UILib
         }
 
         //左クリックアップの判定
-        protected static bool ClickUpLeftDetection(int x1, int y1, int x2, int y2)
+        protected static bool MouseClickUpLeftDetection(int x1, int y1, int x2, int y2)
         {
-            if (MouseClickUpLeftPointX >= x1 && MouseClickUpLeftPointX <= x2 && MouseClickUpLeftPointY >= y1 && MouseClickUpLeftPointY <= y2 && MouseClickDownLeftPointX >= x1 && MouseClickDownLeftPointX <= x2 && MouseClickDownLeftPointY >= y1 && MouseClickDownLeftPointY <= y2)
+            if (MouseClickUpLeft == true && MouseClickUpLeftPointX >= x1 && MouseClickUpLeftPointX <= x2 && MouseClickUpLeftPointY >= y1 && MouseClickUpLeftPointY <= y2 && MouseClickDownLeftPointX >= x1 && MouseClickDownLeftPointX <= x2 && MouseClickDownLeftPointY >= y1 && MouseClickDownLeftPointY <= y2)
             {
                 return true;
             }
@@ -244,12 +244,11 @@ namespace R_UILib
                 DX.GetMousePoint(out MouseClickUpRightPointX, out MouseClickUpRightPointY);
             }
         }
-        */
-
+    
         public static bool UI_Image(int x1, int y1, int x2, int y2, int grhandle)
         {
             DX.DrawExtendGraph(x1, y2, x2, y2, grhandle, DX.TRUE);
-            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;
             }
@@ -260,8 +259,8 @@ namespace R_UILib
         }
         public static bool UI_StringImage(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color)
         {
-            DX.DrawString(x1+(((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2)/*中央揃え*/, y1+(((y2-y1) - DX.GetFontSizeToHandle(fonthandle)) / 2)/*縦中央揃え*/, str, color);
-            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
+            DX.DrawString(x1+(((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2), y1+(((y2-y1) - DX.GetFontSizeToHandle(fonthandle)) / 2), str, color);
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;
             }
@@ -273,8 +272,8 @@ namespace R_UILib
         public static bool UI_StringImage(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color, int grhandle)
         {
             DX.DrawExtendGraph(x1, y1, x2, y2, grhandle, DX.TRUE);
-            DX.DrawString(x1 + (((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2)/*中央揃え*/, y1 + (((y2 - y1) - DX.GetFontSizeToHandle(fonthandle)) / 2)/*縦中央揃え*/, str, color);
-            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
+            DX.DrawString(x1 + (((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2), y1 + (((y2 - y1) - DX.GetFontSizeToHandle(fonthandle)) / 2), str, color);
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;
             }
@@ -289,7 +288,7 @@ namespace R_UILib
             int y2 = y1 + DX.GetFontSizeToHandle(fonthandle);
             DX.DrawString(x1, y1, str, color);
 
-            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;
             }
@@ -304,7 +303,7 @@ namespace R_UILib
             int y2 = y1 + DX.GetFontSizeToHandle(fonthandle);
             DX.DrawExtendGraph(x1, y1, x2, y2, grhandle, DX.TRUE);
             DX.DrawString(x1, y1, str, color);
-            if (MouseClickUpLeft == true && ClickUpLeftDetection(x1, y1, x2, y2) == true)
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
             {
                 return true;
             }
@@ -313,10 +312,97 @@ namespace R_UILib
                 return false;
             }
         }
-        //x1 y1 x2 y2 grhandle 
+        // x1 y1 x2 y2 grhandle 
         // 1クリックで数回判定される
         // 長押し用も必要
+        */
+    }
+    
+
+    class RUI_ButtonImage : RUI_MouseData
+    {
+        // 画像のみ
+        public bool Show(int x1, int y1, int x2, int y2, int grhandle)
+        {
+            DX.DrawExtendGraph(x1, y2, x2, y2, grhandle, DX.TRUE);
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    class RUI_ButtonString : RUI_MouseData
+    {
+        // 文字列のみ
+        // 文字中央揃え
+        // ボタンサイズ自由
+        public bool Show(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color)
+        {
+            DX.DrawString(x1 + (((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2), y1 + (((y2 - y1) - DX.GetFontSizeToHandle(fonthandle)) / 2), str, color);
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        // 文字列のみ
+        public bool Show(int x1, int y1, string str, int fonthandle, uint color)
+        {
+            int x2 = x1 + DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle);
+            int y2 = y1 + DX.GetFontSizeToHandle(fonthandle);
+            DX.DrawString(x1, y1, str, color);
+
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
-    RUI_Button
+    class RUI_ButtonImageString : RUI_MouseData
+    {
+        // 画像と文字列
+        // 文字中央揃え
+        // ボタンサイズ自由
+        public bool Show(int x1, int y1, int x2, int y2, string str, int fonthandle, uint color, int grhandle)
+        {
+            DX.DrawExtendGraph(x1, y1, x2, y2, grhandle, DX.TRUE);
+            DX.DrawString(x1 + (((x2 - x1) - DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle)) / 2), y1 + (((y2 - y1) - DX.GetFontSizeToHandle(fonthandle)) / 2), str, color);
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        // 画像と文字列
+        public bool Show(int x1, int y1, string str, int fonthandle, uint color, int grhandle)
+        {
+            int x2 = x1 + DX.GetDrawStringWidthToHandle(str, str.Length, fonthandle);
+            int y2 = y1 + DX.GetFontSizeToHandle(fonthandle);
+            DX.DrawExtendGraph(x1, y1, x2, y2, grhandle, DX.TRUE);
+            DX.DrawString(x1, y1, str, color);
+            if (MouseClickUpLeftDetection(x1, y1, x2, y2) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 }

@@ -47,11 +47,13 @@ namespace R_RPG
 
             int grhandle = DX.LoadGraph("Texture\\diamond_block.png");
 
+            RUI_ButtonString Button1 = new RUI_ButtonString();
+
             while (DX.ScreenFlip() == 0 && DX.ProcessMessage() == 0 && DX.ClearDrawScreen() == 0)
             {
                 RUI.UptadeMouseState();
 
-                if (RUI.UI_String(0, 0, /*200, 100, */"おはよう", FontHandle, DX.GetColor(255,255,255)/*, grhandle*/) == true)
+                if (Button1.Show(0, 0, /*200, 100, */"おはよう", FontHandle, DX.GetColor(255,255,255), grhandle) == true)
                 {
                     Console.WriteLine("Clicked");
                 }
