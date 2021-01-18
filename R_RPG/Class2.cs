@@ -47,7 +47,7 @@ namespace R_RPG
 
             int grhandle = DX.LoadGraph("Texture\\diamond_block.png");
 
-            RUI_ButtonString Button1 = new RUI_ButtonString();
+            RUI_ButtonImageString Button1 = new RUI_ButtonImageString();
 
             while (DX.ScreenFlip() == 0 && DX.ProcessMessage() == 0 && DX.ClearDrawScreen() == 0)
             {
