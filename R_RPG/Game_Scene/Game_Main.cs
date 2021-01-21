@@ -59,20 +59,32 @@ namespace R_RPG.Game_Scene
                 Array.Copy(Key_State.KeyState, Key_State.KeyStateOld, 256);
                 DX.GetHitKeyStateAll(Key_State.KeyState);
 
-                //描画
-                Game_Draw_Main.GameDrawMain(PD,FPS);
-
-                //操作
+                // Handle
                 if (GameControlHandle == "GameMain")
                 {
+                    //描画
+                    Game_Draw_Main.GameDrawMain(PD, FPS);
+                    //操作
                     CharacterControl.Player_Control(PD, ElapsedTime1F);
                 }
                 else if (GameControlHandle == "GameEscMenu")
                 {
-                    C_GameEscMenu.CGameEscMenu();
+                    //描画
+                    Game_Draw_Main.GameDrawMain(PD, FPS);
+                    //操作
+                    if (C_GameEscMenu.CGameEscMenu() == 1)
+                    {
+                        return;
+                    }
                 }
 
 
+            }
+            if (DX.ProcessMessage() == -1)
+            {
+                // 主にウィンドウが閉じられたとき実行される
+                // データのセーブ等を実行
+                return;
             }
         }
     }
