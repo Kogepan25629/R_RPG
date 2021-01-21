@@ -9,7 +9,7 @@ namespace R_RPG.Game_Scene
 {
     class C_GameEscMenu
     {
-        static public void CGameEscMenu()
+        static public byte CGameEscMenu()
         {
             //Draw_Esc_Menu
             Draw_Esc_Menu();
@@ -19,9 +19,9 @@ namespace R_RPG.Game_Scene
             {
                 DX.SetDrawBright(255, 255, 255);    // 通常の明るさにする
                 Game_Main.GameControlHandle = "GameMain";    // 操作をGameMainに戻す
-                return;
+                return 0;
             }
-
+            return 0;// 一時的
         }
 
         //Draw_Esc_Menu
