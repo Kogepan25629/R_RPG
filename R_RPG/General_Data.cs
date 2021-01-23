@@ -8,7 +8,8 @@ namespace R_RPG
 {
     static class GeD // GeneralData
     {
-        // 定数
+        //// 定数
+        //ボタンサイズ
         public static readonly int BUTTON1_SIZE1X;
         public static readonly int BUTTON1_SIZE1Y;
         public static readonly int BUTTON1_SIZE2X;
