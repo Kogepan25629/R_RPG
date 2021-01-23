@@ -16,7 +16,7 @@ namespace R_RPG.Game_Scene
         static uint Color_White = DX.GetColor(255, 255, 255);
 
         //メイン描画処理ライン
-        static public void GameDrawMain(Player_Data PD,int FPS)
+        static public void GameDrawMain(Player_Data PD,int FPS, bool Enable_Draw_String)
         {
 
             //画像描画
@@ -26,12 +26,12 @@ namespace R_RPG.Game_Scene
 
                 //プレイヤー描画
                 {
-                    DX.DrawExtendGraph(Window_Width / 2 - (Setting_TileSize / 2), Window_Heigt / 2 - (Setting_TileSize / 2), Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data.TileGraphicData[3], DX.TRUE);
+                    DX.DrawExtendGraph(GeD.Window_Width / 2 - (Setting_TileSize / 2), GeD.Window_Heigt / 2 - (Setting_TileSize / 2), GeD.Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), GeD.Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data.TileGraphicData[3], DX.TRUE);
                 }
             }
 
             //文字列描画(座標,FPS値等)
-            {
+            if(Enable_Draw_String == true){
                 Draw_String(PD, FPS);
             }
 
@@ -55,8 +55,8 @@ namespace R_RPG.Game_Scene
             INT_Player_Y = (int)Player_Y;
 
             //描画するTile数
-            Tile_Number_X = Window_Width / Setting_TileSize + 1;
-            Tile_Number_Y = Window_Heigt / Setting_TileSize + 1;
+            Tile_Number_X = GeD.Window_Width / Setting_TileSize + 1;
+            Tile_Number_Y = GeD.Window_Heigt / Setting_TileSize + 1;
             if (Tile_Number_X % 2 == 0)
             {
                 Tile_Number_X++;
@@ -100,10 +100,10 @@ namespace R_RPG.Game_Scene
                 if (Player_Y_Map_D >= 0 && Player_Y_Map_D < map_data[Player_Dimension][0].GetLength(0))
                 {
                     Player_X_Map_D = Player_X_Map;
-                    int DrawY = ((Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
+                    int DrawY = ((GeD.Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
                     for (int x = 0; x <= Tile_Number_X; x++)
                     {
-                        int DrawX = ((Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
+                        int DrawX = ((GeD.Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
                         if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][0][0].GetLength(0))
                         {
                             DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TileGraphicData[map_data[Player_Dimension][0][Player_Y_Map_D][Player_X_Map_D]], DX.FALSE);
@@ -122,10 +122,10 @@ namespace R_RPG.Game_Scene
                 if (Player_Y_Map_D >= 0 && Player_Y_Map_D < map_data[Player_Dimension][1].GetLength(0))
                 {
                     Player_X_Map_D = Player_X_Map;
-                    int DrawY = ((Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
+                    int DrawY = ((GeD.Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
                     for (int x = 0; x <= Tile_Number_X; x++)
                     {
-                        int DrawX = ((Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
+                        int DrawX = ((GeD.Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
                         if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][1][0].GetLength(0))
                         {
                             DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TileGraphicData[map_data[Player_Dimension][1][Player_Y_Map_D][Player_X_Map_D]], DX.TRUE);
