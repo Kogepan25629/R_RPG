@@ -34,6 +34,9 @@ namespace R_RPG.Game_Scene
             Player_Data_Load.PDL();                 //プレイヤーのデータを読み込む(Player_Dataに)
             Player_Data PD = new Player_Data();     //Player_Dataのインスタンス化
 
+            //フォント読み込み
+            FoD.Load_Font();
+
             //コントロール
             GameControlHandle = "GameMain";
 
@@ -63,14 +66,14 @@ namespace R_RPG.Game_Scene
                 if (GameControlHandle == "GameMain")
                 {
                     //描画
-                    Game_Draw_Main.GameDrawMain(PD, FPS);
+                    Game_Draw_Main.GameDrawMain(PD, FPS, true);
                     //操作
                     CharacterControl.Player_Control(PD, ElapsedTime1F);
                 }
                 else if (GameControlHandle == "GameEscMenu")
                 {
                     //描画
-                    Game_Draw_Main.GameDrawMain(PD, FPS);
+                    Game_Draw_Main.GameDrawMain(PD, FPS, false);
                     //操作
                     if (C_GameEscMenu.CGameEscMenu() == 1)
                     {

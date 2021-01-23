@@ -11,6 +11,8 @@ namespace R_RPG
     class Program
     {
         //[STAThread]
+
+        /**/
         static void Main()
         {
             //Dxlibの初期化
@@ -24,10 +26,12 @@ namespace R_RPG
 
             //DxLibMain.Main_Test();
         }
-
-        static void Mainn()
+        /*/
+        static void Main()
         {
             Class2.class2();
         }
+        /**/
     }
 }
+

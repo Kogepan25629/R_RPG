@@ -12,7 +12,7 @@ namespace R_RPG
     static class Dxlib_Init
     {
         //ウィンドウサイズを格納する変数
-        static public int Window_Width, Window_Heigt;
+        
         static public void Dxlib_Initialization()
         {
             //Dxlib　前処理
@@ -25,8 +25,8 @@ namespace R_RPG
                 {//フルスクリーン
 
                     int tekitou;
-                    DX.GetDefaultState(out Window_Width, out Window_Heigt, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou);
-                    DX.SetGraphMode(Window_Width, Window_Heigt, 32);
+                    DX.GetDefaultState(out GeD.Window_Width, out GeD.Window_Heigt, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou, out tekitou);
+                    DX.SetGraphMode(GeD.Window_Width, GeD.Window_Heigt, 32);
                     DX.SetFullScreenResolutionMode(DX.DX_FSRESOLUTIONMODE_DESKTOP);
                     DX.ChangeWindowMode(DX.FALSE);
                     //Window_Width = 1920; Window_Heigt = 1080;
@@ -36,8 +36,8 @@ namespace R_RPG
 
                     DX.SetWindowStyleMode(9);
 
-                    Window_Width = Setting_Window_Width; Window_Heigt = Setting_Window_Heigt;
-                    DX.SetGraphMode(Window_Width, Window_Heigt, 32);
+                    GeD.Window_Width = Setting_Window_Width; GeD.Window_Heigt = Setting_Window_Heigt;
+                    DX.SetGraphMode(GeD.Window_Width, GeD.Window_Heigt, 32);
                     DX.ChangeWindowMode(DX.TRUE);
 
                     // window のサイズ変更の可不可
