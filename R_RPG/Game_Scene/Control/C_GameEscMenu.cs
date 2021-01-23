@@ -30,38 +30,43 @@ namespace R_RPG.Game_Scene
         }
 
         //Draw_Esc_Menu
-        static private byte Draw_Esc_Menu()
+        private static byte Draw_Esc_Menu()
         {
-            byte Return = 0;
-            DX.SetDrawBright(255, 255, 255);    // 明るさを戻しEscMenuを描画
+            try
+            {
+                DX.SetDrawBright(255, 255, 255);    // 明るさを戻しEscMenuを描画
+                // ボタンサイズの計算
+                //int ButtonSizeX1, ButtonSizeY1, ButtonSizeX2, ButtonSizeY2, DrawSpaceX;
+                int ButtonWidth1 = (int)(GeD.Window_Width * 0.2);
+                int ButtonHeight1 = (int)(GeD.Window_Heigt * 0.1);
+                int DrawSpaceX = (int)(GeD.Window_Width * 0.05);
+                int DrawSpaceY = (int)(GeD.Window_Heigt * 0.05);
+                int ButtonPositionX = GeD.Window_Width / 2 - DrawSpaceX / 2 - ButtonWidth1;
+                int ButtonPositionY = (int)(GeD.Window_Heigt * 0.2 + ButtonHeight1);
+                // ボタンの描画
+                if (Button1.Show(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1, "設定", FoD.TestFont, DX.GetColor(255, 255, 255), Graphic_Data.GraphicData["Black"]) == true)
+                {
+                    return 2;
+                }
 
-            // ボタンサイズの計算
-            //int ButtonSizeX1, ButtonSizeY1, ButtonSizeX2, ButtonSizeY2, DrawSpaceX;
-            int ButtonWidth1    = (int)(GeD.Window_Width * 0.2);
-            int ButtonHeight1   = (int)(GeD.Window_Heigt * 0.1);
-            int DrawSpaceX      = (int)(GeD.Window_Width * 0.1);
-            int DrawSpaceY      = (int)(GeD.Window_Heigt * 0.05);
-            int ButtonPositionX = GeD.Window_Width / 2 - DrawSpaceX / 2 - ButtonWidth1;
-            int ButtonPositionY = (int)(GeD.Window_Heigt * 0.2 + ButtonHeight1);
-            // ボタンの描画
-            if(Button1.Show(ButtonPositionX, ButtonPositionY, ButtonPositionX+ButtonWidth1, ButtonPositionY+ButtonHeight1, "アホ", FoD.TestFont, DX.GetColor(255, 255, 255), Graphic_Data.GraphicData["Black"]) == true)
-            {
-                Return = 2;
-            }
-            ButtonPositionX = ButtonPositionX + DrawSpaceX + ButtonWidth1; 
-            if(Button1.Show(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1, "クズ", FoD.TestFont, DX.GetColor(255, 255, 255), Graphic_Data.GraphicData["Black"]))
-            {
-                Return = 3;
-            }
-            ButtonPositionX = ButtonPositionX - DrawSpaceX - ButtonWidth1;
-            ButtonPositionY += DrawSpaceY; 
-            if(Button1.Show(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1, "クズ", FoD.TestFont, DX.GetColor(255, 255, 255), Graphic_Data.GraphicData["Black"]))
-            {
-                Return = 1;
-            }
+                ButtonPositionX = ButtonPositionX + DrawSpaceX + ButtonWidth1;
+                if (Button2.Show(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1, "実績", FoD.TestFont, DX.GetColor(255, 255, 255), Graphic_Data.GraphicData["Black"]))
+                {
+                    return 3;
+                }
 
-            DX.SetDrawBright(100, 100, 100);    // 少し暗くして
-            return Return;
+                ButtonPositionX = ButtonPositionX - DrawSpaceX - ButtonWidth1;
+                ButtonPositionY += ButtonHeight1 + DrawSpaceY;
+                if (Button3.Show(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1 * 2 + DrawSpaceX, ButtonPositionY + ButtonHeight1, "ゲームに戻る", FoD.TestFont, DX.GetColor(255, 255, 255), Graphic_Data.GraphicData["Black"]) == true)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+            finally
+            {
+                DX.SetDrawBright(100, 100, 100);    // 少し暗くして
+            }
         }
     }
 }
