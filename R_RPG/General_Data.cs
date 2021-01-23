@@ -20,7 +20,7 @@ namespace R_RPG
         public static readonly int BUTTON1_SIZE4Y;
 
 
-        // 変数
+        //// 変数
         public static int Window_Width, Window_Heigt;   // ウィンドウサイズ
     }
 }
