@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DxLibDLL;
+using R_UILib;
 
 namespace R_RPG.Game_Scene
 {
@@ -44,6 +45,14 @@ namespace R_RPG.Game_Scene
             //メインループ
             while (DX.ScreenFlip() == 0 && DX.ProcessMessage() == 0 && DX.ClearDrawScreen() == 0)
             {
+                // ローカルウィンドウサイズの取得
+                if (Setting.Setting_PossibleChangeWindowSize == true && Setting.Setting_ChangeWindowMode == true) {
+                    DX.GetWindowSize(out GeD.Window_Width, out GeD.Window_Heigt);
+                }
+
+                // RUI マウス情報取得
+                RUI.UptadeMouseState();
+
                 //時間関係
                 NowTime = DX.GetNowHiPerformanceCount();    //現在の時間を取得
                 ElapsedTime1F = (NowTime - LastTime) / 1000000.0;   //1フレーム経過にかかった時間(秒)
@@ -87,6 +96,10 @@ namespace R_RPG.Game_Scene
             {
                 // 主にウィンドウが閉じられたとき実行される
                 // データのセーブ等を実行
+
+                //Console.WriteLine("WindowExit");
+                //Console.ReadLine();
+
                 return;
             }
         }

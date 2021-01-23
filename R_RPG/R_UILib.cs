@@ -7,7 +7,7 @@ using DxLibDLL;
 
 namespace R_UILib
 {
-    abstract public class RUI_MouseData
+    public abstract class RUI_MouseData
     {
         //マウス座標
         protected static int MousePointX { get; private set; }
@@ -37,7 +37,7 @@ namespace R_UILib
         protected static bool MouseClickUpLeft { get; private set; }
         protected static bool MouseClickUpRight { get; private set; }
 
-        protected  static void UptadeMouseState()
+        protected static void UptadeMouseState()
         {
             OldMouseClickLeft = MouseClickLeft;
             OldMouseClickRight = MouseClickRight;
