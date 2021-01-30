@@ -10,17 +10,17 @@ namespace R_RPG.Game_Scene
 {
     class C_GameEscMenu
     {
-        static RUI_ButtonImageString Button1 = new RUI_ButtonImageString();
-        static RUI_ButtonImageString Button2 = new RUI_ButtonImageString();
-        static RUI_ButtonImageString Button3 = new RUI_ButtonImageString();
-        static RUI_ButtonImageString Button4 = new RUI_ButtonImageString();
+        static RUI_Button Button1 = new RUI_Button();
+        static RUI_Button Button2 = new RUI_Button();
+        static RUI_Button Button3 = new RUI_Button();
+        static RUI_Button Button4 = new RUI_Button();
         static public byte CGameEscMenu()
         {
             //Draw_Esc_Menu
-            int Handle = Draw_Esc_Menu();
+            int ButtonResult = Draw_Esc_Menu();
 
             //Escを押した時
-            if((Key_State.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && Key_State.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || Handle == 1)
+            if((Key_State.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && Key_State.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 1)
             {
                 DX.SetDrawBright(255, 255, 255);    // 通常の明るさにする
                 Game_Main.GameControlHandle = "GameMain";    // 操作をGameMainに戻す
