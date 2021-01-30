@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
     <Compile Include="Dxlib_Init.cs" />
     <Compile Include="Font_Data.cs" />
     <Compile Include="Game_Scene\Control\C_GameEscMenu.cs" />
