@@ -10,20 +10,42 @@ namespace R_RPG.Game_Scene
 {
     class C_GameEscMenu
     {
-        static RUI_Button Button1 = new RUI_Button();
-        static RUI_Button Button2 = new RUI_Button();
-        static RUI_Button Button3 = new RUI_Button();
-        static RUI_Button Button4 = new RUI_Button();
+        // このクラスの初期化ハンドル
+        private static bool EnableInit = true;
+
+        // ボタンのインスタンス
+        private static RUI_Button Button1;
+        private static RUI_Button Button2;
+        private static RUI_Button Button3;
+        private static RUI_Button Button4;
+
+        // このクラスの初期化
+        private static void CGameEscMenuInit()
+        {
+            Button1 = new RUI_Button();
+            Button2 = new RUI_Button();
+            Button3 = new RUI_Button();
+            Button4 = new RUI_Button();
+        }
+        
         static public byte CGameEscMenu()
         {
+            // CGameEscMenuを開いたときに実行
+            // CGameMenuのボタンを初期化
+            if (EnableInit == true) {
+                CGameEscMenuInit();
+                EnableInit = false;
+            }
+
             //Draw_Esc_Menu
             int ButtonResult = Draw_Esc_Menu();
 
             //Escを押した時
             if((Key_State.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && Key_State.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 1)
             {
-                DX.SetDrawBright(255, 255, 255);    // 通常の明るさにする
+                DX.SetDrawBright(255, 255, 255);    // 通常の明るさにする(明るさを戻す)
                 Game_Main.GameControlHandle = "GameMain";    // 操作をGameMainに戻す
+                EnableInit = true;
                 return 0;
             }
             return 0;// 一時的
@@ -68,5 +90,6 @@ namespace R_RPG.Game_Scene
                 DX.SetDrawBright(100, 100, 100);    // 少し暗くして
             }
         }
+
     }
 }

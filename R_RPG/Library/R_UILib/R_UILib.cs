@@ -1,7 +1,7 @@
 ﻿using DxLibDLL;
 using System;
 
-// Version 0.2.1
+// Version 0.3.1
 
 namespace R_UILib
 {
@@ -263,6 +263,22 @@ namespace R_UILib
                 return 0;
             }
         }
+
+        //座標の設定
+        public void  SetPoint(int x1, int y1)
+        {
+            X1 = x1;
+            Y1 = y1;
+        }
+        public void SetPoint(int x1, int y1, int x2, int y2)
+        {
+            X1 = x1;
+            Y1 = y1;
+            X2 = x2;
+            Y2 = y2;
+        }
+
+        //文字列の設定
         public int SetString(string str)
         {
             Str = str;
@@ -283,7 +299,6 @@ namespace R_UILib
                 return 0;
             }
         }
-
 
         //ボタン描画
         public int Show()
