@@ -15,7 +15,7 @@ namespace R_RPG.Game_Scene
         private static RUI_Button Button3;
         private static RUI_Button Button4;
 
-        // このクラスの初期化
+        // ボタンの初期化
         private static void CGameEscMenuInit()
         {
             // 変数の宣言と値の計算
