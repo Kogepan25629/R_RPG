@@ -65,9 +65,9 @@
     <Compile Include="Game_Scene\Control\Key_State.cs" />
     <Compile Include="General_Data.cs" />
     <Compile Include="Graphic_Data.cs" />
+    <Compile Include="Library\R_UILib\R_UILib.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="DxDLLW.cs" />
-    <Compile Include="R_UILib.cs" />
+    <Compile Include="Library\DxDLLW.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="Game_Scene\Control\CharacterControl.cs" />
     <Compile Include="Game_Scene\Game_Draw_Main.cs" />
@@ -89,6 +89,8 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Library\R_UILib\reference.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
