@@ -38,6 +38,9 @@ namespace R_RPG.Game_Scene
             //フォント読み込み
             FoD.Load_Font();
 
+            //R_UILibの初期化
+            RUI.R_UILibInit();
+
             //コントロール
             GameControlHandle = "GameMain";
 

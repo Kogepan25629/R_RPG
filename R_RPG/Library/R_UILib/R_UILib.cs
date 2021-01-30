@@ -1,7 +1,7 @@
 ﻿using DxLibDLL;
 using System;
 
-// Version 0.3.1
+// Version 0.3.3
 
 namespace R_UILib
 {
@@ -246,8 +246,26 @@ namespace R_UILib
         {
             Str = str;
             FontHandle = fonthandle;
-            if (Mode == 1 || Mode == 3 || Mode == 5) {
+            StringWidth = DX.GetDrawStringWidthToHandle(Str, Str.Length, FontHandle);
+            StringHeight = DX.GetFontSizeToHandle(FontHandle);
+
+            if (Mode == 1 || Mode == 4 || Mode == 5) {
                 if (X1 != -1 && Y1 != -1) {
+                    X2 = X1 + StringWidth;
+                    Y2 = Y1 + StringHeight;
+                    return 0;
+                }
+                else {
+                    return -1;
+                }
+            }
+            return 0;
+        }
+        public int SetString(string str)
+        {
+            Str = str;
+            if (Mode == 1 || Mode == 4 || Mode == 5) {
+                if (FontHandle != -1 && X1 != -1 && Y1 != -1) {
                     StringWidth = DX.GetDrawStringWidthToHandle(Str, Str.Length, FontHandle);
                     StringHeight = DX.GetFontSizeToHandle(FontHandle);
                     X2 = X1 + StringWidth;
@@ -278,28 +296,6 @@ namespace R_UILib
             Y2 = y2;
         }
 
-        //文字列の設定
-        public int SetString(string str)
-        {
-            Str = str;
-            if (Mode == 1 || Mode == 4 || Mode == 5) {
-                if (FontHandle != -1 && X1 != -1 && Y1 != -1) {
-                    StringWidth = DX.GetDrawStringWidthToHandle(Str, Str.Length, FontHandle);
-                    StringHeight = DX.GetFontSizeToHandle(FontHandle);
-                    X2 = X1 + StringWidth;
-                    Y2 = Y1 + StringHeight;
-
-                    return 0;
-                }
-                else {
-                    return -1;
-                }
-            }
-            else {
-                return 0;
-            }
-        }
-
         //ボタン描画
         public int Show()
         {
@@ -310,11 +306,11 @@ namespace R_UILib
                     //文字列の描画
                     if (Str == "") {
                     }
-                    else if (Mode == 1 || Mode == 4 || Mode == 5) {
+                    else if (Mode == 1) {
                         DX.DrawString(X1, Y1, Str, StrColor);
                     }
                     else {
-                        DX.DrawString(X1 + (((X2 - X1) - StringWidth) / 2), Y1 + (((Y2 - Y1) - DX.GetFontSizeToHandle(StringHeight)) / 2), Str, StrColor);
+                        DX.DrawString(X1 + (((X2 - X1) - StringWidth) / 2), Y1 + (((Y2 - Y1) - StringHeight) / 2), Str, StrColor);
                     }
                     return 0;
                 }else if ((Mode == 2 || Mode == 4) && GrHandle2 != -1) {
@@ -329,8 +325,11 @@ namespace R_UILib
                     if (Str == "") {
 
                     }
-                    else {
+                    else if(Mode == 4){
                         DX.DrawString(X1, Y1, Str, StrColor);
+                    }
+                    else {
+                        DX.DrawString(X1 + (((X2 - X1) - StringWidth) / 2), Y1 + (((Y2 - Y1) - StringHeight) / 2), Str, StrColor);
                     }
                     return 0;
                 }else if (Mode == 3 || Mode == 5) {
@@ -346,8 +345,12 @@ namespace R_UILib
                     if (Str == "") {
 
                     }
-                    else {
+                    else if(Mode == 5){
                         DX.DrawString(X1, Y1, Str, StrColor);
+                    }
+                    else {
+                        //Console.WriteLine(StringWidth);
+                        DX.DrawString(X1 + (((X2 - X1) - StringWidth) / 2), Y1 + (((Y2 - Y1) - StringHeight) / 2), Str, StrColor);
                     }
                     return 0;
                 }
