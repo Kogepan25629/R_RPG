@@ -61,7 +61,6 @@
     <Compile Include="Dxlib_Init.cs" />
     <Compile Include="Font_Data.cs" />
     <Compile Include="Game_Scene\Control\C_GameEscMenu.cs" />
-    <Compile Include="Game_Scene\Control\Key_State.cs" />
     <Compile Include="General_Data.cs" />
     <Compile Include="Graphic_Data.cs" />
     <Compile Include="Library\R_UILib\R_UILib.cs" />
