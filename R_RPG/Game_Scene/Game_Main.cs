@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DxLibDLL;
 using R_UILib;
 
@@ -71,8 +67,8 @@ namespace R_RPG.Game_Scene
                 }
 
                 // キーボード押下状態の読み込み
-                Array.Copy(Key_State.KeyState, Key_State.KeyStateOld, 256);
-                DX.GetHitKeyStateAll(Key_State.KeyState);
+                Array.Copy(GeD.KeyState, GeD.KeyStateOld, 256);
+                DX.GetHitKeyStateAll(GeD.KeyState);
 
                 // Handle
                 if (GameControlHandle == "GameMain")

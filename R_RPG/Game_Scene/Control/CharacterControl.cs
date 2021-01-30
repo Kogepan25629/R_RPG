@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DxLibDLL;
 
 namespace R_RPG.Game_Scene
@@ -30,13 +26,13 @@ namespace R_RPG.Game_Scene
             //操作 Math.Floor()
             {
                 //Esc
-                if(Key_State.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && Key_State.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0)
+                if(GeD.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && GeD.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0)
                 {
                     Game_Main.GameControlHandle = "GameEscMenu";
                     return;
                 }
                 //左シフト
-                switch (Key_State.KeyState[DX.KEY_INPUT_LSHIFT])
+                switch (GeD.KeyState[DX.KEY_INPUT_LSHIFT])
                 {
                     case 1:
                         Player_Now_Speed = Player_Speed * 3;
@@ -46,7 +42,7 @@ namespace R_RPG.Game_Scene
                         break;
                 }
                 //W
-                switch (Key_State.KeyState[DX.KEY_INPUT_W])
+                switch (GeD.KeyState[DX.KEY_INPUT_W])
                 {
                     case 1:
                         Player_Y -= Player_Now_Speed * ElapsedTime1F;
@@ -55,7 +51,7 @@ namespace R_RPG.Game_Scene
                         break;
                 }
                 //S
-                switch (Key_State.KeyState[DX.KEY_INPUT_S])
+                switch (GeD.KeyState[DX.KEY_INPUT_S])
                 {
                     case 1:
                         Player_Y += Player_Now_Speed * ElapsedTime1F;
@@ -64,7 +60,7 @@ namespace R_RPG.Game_Scene
                         break;
                 }
                 //A
-                switch (Key_State.KeyState[DX.KEY_INPUT_A])
+                switch (GeD.KeyState[DX.KEY_INPUT_A])
                 {
                     case 1:
                         Player_X -= Player_Now_Speed * ElapsedTime1F;
@@ -73,7 +69,7 @@ namespace R_RPG.Game_Scene
                         break;
                 }
                 //D
-                switch (Key_State.KeyState[DX.KEY_INPUT_D])
+                switch (GeD.KeyState[DX.KEY_INPUT_D])
                 {
                     case 1:
                         Player_X += Player_Now_Speed * ElapsedTime1F;

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace R_RPG
 {
@@ -22,5 +18,9 @@ namespace R_RPG
 
         //// 変数
         public static int Window_Width, Window_Heigt;   // ウィンドウサイズ
+
+        //Dxlibで取得したキーの状態
+        static public byte[] KeyState = new byte[256];
+        static public byte[] KeyStateOld = new byte[256];
     }
 }

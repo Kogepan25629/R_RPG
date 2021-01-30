@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DxLibDLL;
 using R_UILib;
 
@@ -67,7 +63,7 @@ namespace R_RPG.Game_Scene
             int ButtonResult = Draw_Esc_Menu();
 
             //Escを押した時
-            if((Key_State.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && Key_State.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 1)
+            if((GeD.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && GeD.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 1)
             {
                 DX.SetDrawBright(255, 255, 255);    // 通常の明るさにする(明るさを戻す)
                 Game_Main.GameControlHandle = "GameMain";    // 操作をGameMainに戻す

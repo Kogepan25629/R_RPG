@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DxLibDLL;
 
 using static R_RPG.Dxlib_Init;//Window_Width,Window_Width
