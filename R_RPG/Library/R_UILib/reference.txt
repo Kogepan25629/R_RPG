@@ -1,4 +1,4 @@
-﻿R_UILib	   Version 0.2.1
+﻿R_UILib	   Version 0.3.1
 
 各クラスと関数の説明
 
@@ -6,6 +6,7 @@ RUI クラス
 関数                void R_UILibInit()
 
                     R_UILibの初期化を行う最初に一回実行する必要がある	
+
 
                     void UptadeMouseState()
 
@@ -39,5 +40,16 @@ RUI_Button クラス
                     戻り値   0 : 成功
                             -1 : 失敗
 
-                    説明   ボタンに表示する文字列を設定する
-                           Modeが1か3のとき文字列の長さに応じてX2, Y2の値を設定し、ボタンのサイズを文字列のサイズに合わせる。
+                    説明    ボタンに表示する文字列を設定する
+                            Modeが1か3のとき文字列の長さに応じてX2, Y2の値を設定し、ボタンのサイズを文字列のサイズに合わせる。
+
+
+                    void SetPoint(int x1, int y1)
+                    void SetPoint(int x1, int y1, int x1, int y2)
+
+                    引数   int x1    ボタンの左上座標
+                           int y1    ボタンの左上座標
+                           int x2    ボタンの右下座標
+                           int y2    ボタンの右下座標
+
+                    説明    ボタンの座標をまとめて設定できる。
