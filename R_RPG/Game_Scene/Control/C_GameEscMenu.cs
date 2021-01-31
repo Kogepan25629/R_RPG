@@ -49,6 +49,12 @@ namespace R_RPG.Game_Scene
             Button3.Mode = 3;
             Button3.SetString("ゲームに戻る", FoD.TestFont);
             Button3.GrHandle = Graphic_Data.GraphicData["Black"];
+            //Button4
+            ButtonPositionY += ButtonHeight1 + DrawSpaceY;
+            Button4.SetPoint(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1);
+            Button4.Mode = 3;
+            Button4.SetString("ゲームを終了", FoD.TestFont);
+            Button4.GrHandle = Graphic_Data.GraphicData["Black"];
         }
         
         static public byte CGameEscMenu()
@@ -64,12 +70,15 @@ namespace R_RPG.Game_Scene
             int ButtonResult = Draw_Esc_Menu();
 
             // Escを押した時
-            if((GeD.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && GeD.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 1)
+            if((GeD.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && GeD.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 2)
             {
                 DX.SetDrawBright(255, 255, 255);    // 通常の明るさにする(明るさを戻す)
                 Game_Main.GameControlHandle = "GameMain";    // 操作をGameMainに戻す
                 EnableInit = true;
                 return 0;
+            }
+            if (ButtonResult == 1) {
+                return 1;
             }
             return 0;// 一時的
         }
@@ -85,18 +94,19 @@ namespace R_RPG.Game_Scene
                 Button1.Show();
                 Button2.Show();
                 Button3.Show();
+                Button4.Show();
 
                 // ボタンのクリック判定
-                if (Button1.LeftUpDetection() == true)
-                {
-                    return 2;
+                if (Button1.LeftUpDetection() == true){
+                    return 4;
                 }
-                if (Button2.LeftUpDetection() == true)
-                {
+                if (Button2.LeftUpDetection() == true){
                     return 3;
                 }
-                if (Button3.LeftUpDetection() == true)
-                {
+                if (Button3.LeftUpDetection() == true){
+                    return 2;
+                }
+                if (Button4.LeftUpDetection() == true) {
                     return 1;
                 }
                 return 0;
