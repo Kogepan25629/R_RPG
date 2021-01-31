@@ -25,6 +25,7 @@ namespace R_RPG.Game_Scene
             int DrawSpaceY = (int)(GeD.Window_Heigt * 0.05);
             int ButtonPositionX = GeD.Window_Width / 2 - DrawSpaceX / 2 - ButtonWidth1;
             int ButtonPositionY = (int)(GeD.Window_Heigt * 0.2 + ButtonHeight1);
+
             // ボタンのインスタンスを生成
             Button1 = new RUI_Button();
             Button2 = new RUI_Button();
@@ -57,7 +58,7 @@ namespace R_RPG.Game_Scene
             Button4.GrHandle = Graphic_Data.GraphicData["Black"];
         }
         
-        static public byte CGameEscMenu()
+        public static byte CGameEscMenu()
         {
             // CGameEscMenuを開いたときに実行
             // CGameMenuのボタンを初期化
@@ -72,9 +73,14 @@ namespace R_RPG.Game_Scene
             // Escを押した時
             if((GeD.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && GeD.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 2)
             {
-                DX.SetDrawBright(255, 255, 255);    // 通常の明るさにする(明るさを戻す)
+                DX.SetDrawBright(255, 255, 255);             // 通常の明るさにする(明るさを戻す)
                 Game_Main.GameControlHandle = "GameMain";    // 操作をGameMainに戻す
-                EnableInit = true;
+                EnableInit = true;                           // クラスの初期化をできるように戻す
+                //ボタンのインスタンスの参照をクリア
+                Button1 = null;
+                Button2 = null;
+                Button3 = null;
+                Button4 = null;
                 return 0;
             }
             if (ButtonResult == 1) {

@@ -1,32 +1,30 @@
 ﻿using System;
 using DxLibDLL;
 
-using static R_RPG.Dxlib_Init;//Window_Width,Window_Width
 using static R_RPG.Setting;
 
 namespace R_RPG.Game_Scene
 {
     class Game_Draw_Main
     {
-        //カラー
+        // カラー
         static uint Color_White = DX.GetColor(255, 255, 255);
 
-        //メイン描画処理ライン
+        // メイン描画処理ライン
         static public void GameDrawMain(Player_Data PD,int FPS, bool Enable_Draw_String)
         {
-
-            //画像描画
+            // 画像描画
             {
-                //マップ描画
+                // マップ描画
                 Draw_Map(PD.Player_X, PD.Player_Y, PD.Player_Dimension, Map_Data.map_data);
 
-                //プレイヤー描画
+                // プレイヤー描画
                 {
                     DX.DrawExtendGraph(GeD.Window_Width / 2 - (Setting_TileSize / 2), GeD.Window_Heigt / 2 - (Setting_TileSize / 2), GeD.Window_Width / 2 + Setting_TileSize - (Setting_TileSize / 2), GeD.Window_Heigt / 2 + Setting_TileSize - (Setting_TileSize / 2), Tile_Data.TileGraphicData[3], DX.TRUE);
                 }
             }
 
-            //文字列描画(座標,FPS値等)
+            // 文字列描画(座標,FPS値等)
             if(Enable_Draw_String == true){
                 Draw_String(PD, FPS);
             }
@@ -35,10 +33,10 @@ namespace R_RPG.Game_Scene
 
 
 
-        //Draw_Map
+        // Draw_Map
         static void Draw_Map(double Player_X, double Player_Y, int Player_Dimension, int[][][][] map_data)
         {
-            //ローカル関数の宣言
+            // ローカル関数の宣言
             int INT_Player_X, INT_Player_Y;
             int Tile_Number_X, Tile_Number_Y;
             int Player_X_Map, Player_Y_Map;
@@ -50,7 +48,7 @@ namespace R_RPG.Game_Scene
             INT_Player_X = (int)Player_X;
             INT_Player_Y = (int)Player_Y;
 
-            //描画するTile数
+            // 描画するTile数
             Tile_Number_X = GeD.Window_Width / Setting_TileSize + 1;
             Tile_Number_Y = GeD.Window_Heigt / Setting_TileSize + 1;
             if (Tile_Number_X % 2 == 0)
@@ -63,7 +61,7 @@ namespace R_RPG.Game_Scene
             }
 
 
-            //Tile位置
+            // Tile位置
             Player_X_Map = INT_Player_X / 1 - (Tile_Number_X / 2);
             Player_Y_Map = INT_Player_Y / 1 - (Tile_Number_Y / 2);
 
@@ -145,9 +143,10 @@ namespace R_RPG.Game_Scene
             DX.DrawString(0, 74, "FPS : " + FPS.ToString(), Color_White);
             DX.DrawString(0, 92, "衝突 : " + CharacterControl.Collision.ToString(), Color_White);
 
-            Console.WriteLine("X座標 : " + PD.Player_X.ToString());
-            Console.WriteLine("Y座標 : " + PD.Player_Y.ToString());
-            Console.WriteLine("衝突 : " + CharacterControl.Collision.ToString());
+            //Console.WriteLine("X座標 : " + PD.Player_X.ToString());
+            //Console.WriteLine("Y座標 : " + PD.Player_Y.ToString());
+            //Console.WriteLine("衝突 : " + CharacterControl.Collision.ToString());
+
             //Console.WriteLine((int)(25+0.99999999999999));
         }
     }
