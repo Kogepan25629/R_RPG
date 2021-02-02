@@ -63,6 +63,10 @@ namespace R_RPG
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
             DX.SetMouseDispFlag(DX.TRUE);
+
+            if (Setting_EnableSystemLog == true) {
+                Console.WriteLine("Dxlib Initialized");
+            }
         }
     }
 }

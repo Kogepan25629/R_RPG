@@ -71,7 +71,7 @@ namespace R_RPG.Game_Scene
             int ButtonResult = Draw_Esc_Menu();
 
             // Escを押した時
-            if((GeD.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && GeD.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 2)
+            if((GeD.KeyState[DX.KEY_INPUT_ESCAPE] == 1 && GeD.KeyStateOld[DX.KEY_INPUT_ESCAPE] == 0) || ButtonResult == 3)
             {
                 DX.SetDrawBright(255, 255, 255);             // 通常の明るさにする(明るさを戻す)
                 Game_Main.GameControlHandle = "GameMain";    // 操作をGameMainに戻す
@@ -83,7 +83,9 @@ namespace R_RPG.Game_Scene
                 Button4 = null;
                 return 0;
             }
-            if (ButtonResult == 1) {
+            if (ButtonResult == 4) {
+                DX.SetDrawBright(255, 255, 255);
+                EnableInit = true;
                 return 1;
             }
             return 0;// 一時的
@@ -104,16 +106,16 @@ namespace R_RPG.Game_Scene
 
                 // ボタンのクリック判定
                 if (Button1.LeftUpDetection() == true){
-                    return 4;
+                    return 1;
                 }
                 if (Button2.LeftUpDetection() == true){
-                    return 3;
-                }
-                if (Button3.LeftUpDetection() == true){
                     return 2;
                 }
+                if (Button3.LeftUpDetection() == true){
+                    return 3;
+                }
                 if (Button4.LeftUpDetection() == true) {
-                    return 1;
+                    return 4;
                 }
                 return 0;
             }

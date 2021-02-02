@@ -44,90 +44,64 @@ namespace R_RPG.Game_Scene
             double PlayerX_O_B, PlayerY_O_B;
             int Player_X_Map_D, Player_Y_Map_D;
 
-            //
+            // 整数のプレイヤー座標　プレイヤーのいるマス
             INT_Player_X = (int)Player_X;
             INT_Player_Y = (int)Player_Y;
 
             // 描画するTile数
             Tile_Number_X = GeD.Window_Width / Setting_TileSize + 1;
             Tile_Number_Y = GeD.Window_Heigt / Setting_TileSize + 1;
-            if (Tile_Number_X % 2 == 0)
+            /*
+            if (Tile_Number_X % 2 == 1)
             {
                 Tile_Number_X++;
             }
-            if (Tile_Number_Y % 2 == 0)
+            if (Tile_Number_Y % 2 == 1)
             {
                 Tile_Number_Y++;
             }
+            */
 
 
             // Tile位置
-            Player_X_Map = INT_Player_X / 1 - (Tile_Number_X / 2);
-            Player_Y_Map = INT_Player_Y / 1 - (Tile_Number_Y / 2);
+            Player_X_Map = INT_Player_X - (Tile_Number_X / 2);
+            Player_Y_Map = INT_Player_Y - (Tile_Number_Y / 2);
 
-            if (Player_X - INT_Player_X > 0 && Player_X - INT_Player_X >= 1 / Setting_TileSize)
-            {
+            // 1マス単位でのずれを計算
+            if (Player_X - INT_Player_X > 0 && Player_X - INT_Player_X >= 1 / Setting_TileSize){
                 PlayerX_O_B = (Player_X - INT_Player_X) / (1.0 / Setting_TileSize);
             }
-            else
-            {
+            else{
                 PlayerX_O_B = 0.0;
             }
-            if (Player_Y - INT_Player_Y > 0)
-            {
+            if (Player_Y - INT_Player_Y > 0){
                 PlayerY_O_B = (Player_Y - INT_Player_Y) / (1.0 / Setting_TileSize);
             }
-            else
-            {
+            else{
                 PlayerY_O_B = 0.0;
             }
+            // 何ドットずれるか
             PlayerX_O = (int)PlayerX_O_B;
             PlayerY_O = (int)PlayerY_O_B;
 
-
-
-            //Map_0  レイヤー0
-            Player_X_Map_D = Player_X_Map;
-            Player_Y_Map_D = Player_Y_Map;
-            for (int y = 0; y <= Tile_Number_Y; y++)
-            {
-                if (Player_Y_Map_D >= 0 && Player_Y_Map_D < map_data[Player_Dimension][0].GetLength(0))
-                {
-                    Player_X_Map_D = Player_X_Map;
-                    int DrawY = ((GeD.Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
-                    for (int x = 0; x <= Tile_Number_X; x++)
-                    {
-                        int DrawX = ((GeD.Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
-                        if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][0][0].GetLength(0))
-                        {
-                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TileGraphicData[map_data[Player_Dimension][0][Player_Y_Map_D][Player_X_Map_D]], DX.FALSE);
+            // 2レイヤー分の描画
+            for (int i=0;i < 2;i++) {
+                Player_X_Map_D = Player_X_Map;
+                Player_Y_Map_D = Player_Y_Map;
+                for (int y = 0; y <= Tile_Number_Y; y++) {
+                    if (Player_Y_Map_D >= 0 && Player_Y_Map_D < map_data[Player_Dimension][i].GetLength(0)) {
+                        Player_X_Map_D = Player_X_Map;
+                        int DrawY = ((GeD.Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
+                        for (int x = 0; x <= Tile_Number_X; x++) {
+                            int DrawX = ((GeD.Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
+                            if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][i][0].GetLength(0)) {
+                                DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TileGraphicData[map_data[Player_Dimension][i][Player_Y_Map_D][Player_X_Map_D]], DX.TRUE/*0=false 1=true*/);
+                            }
+                            Player_X_Map_D += 1;
                         }
-                        Player_X_Map_D += 1;
                     }
+                    Player_Y_Map_D += 1;
                 }
-                Player_Y_Map_D += 1;
-            }
-
-            //Map_1  レイヤー1
-            Player_X_Map_D = Player_X_Map;
-            Player_Y_Map_D = Player_Y_Map;
-            for (int y = 0; y <= Tile_Number_Y; y++)
-            {
-                if (Player_Y_Map_D >= 0 && Player_Y_Map_D < map_data[Player_Dimension][1].GetLength(0))
-                {
-                    Player_X_Map_D = Player_X_Map;
-                    int DrawY = ((GeD.Window_Heigt / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_Y / 2))) + (Setting_TileSize * y - PlayerY_O);
-                    for (int x = 0; x <= Tile_Number_X; x++)
-                    {
-                        int DrawX = ((GeD.Window_Width / 2 - (Setting_TileSize / 2)) - (Setting_TileSize * (Tile_Number_X / 2))) + (Setting_TileSize * x - PlayerX_O);
-                        if (Player_X_Map_D >= 0 && Player_X_Map_D < map_data[Player_Dimension][1][0].GetLength(0))
-                        {
-                            DX.DrawExtendGraph(DrawX, DrawY, DrawX + Setting_TileSize, DrawY + Setting_TileSize, Tile_Data.TileGraphicData[map_data[Player_Dimension][1][Player_Y_Map_D][Player_X_Map_D]], DX.TRUE);
-                        }
-                        Player_X_Map_D += 1;
-                    }
-                }
-                Player_Y_Map_D += 1;
             }
         }
 

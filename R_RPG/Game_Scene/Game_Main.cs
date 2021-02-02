@@ -8,7 +8,7 @@ namespace R_RPG.Game_Scene
     {
         //
         static public string GameControlHandle;
-        static public void GameMain()
+        static public byte GameMain()
         {
             ////変数////
             //時間関係
@@ -23,19 +23,9 @@ namespace R_RPG.Game_Scene
                 FPSCounter = 0;
             }
 
-            //テクスチャ読み込み
-            Tile_Data.TileData();   //
-            Graphic_Data.Graphic_Data_Load();
-
             //Player_Data読み込み
             Player_Data_Load.PDL();                 //プレイヤーのデータを読み込む(Player_Dataに)
             Player_Data PD = new Player_Data();     //Player_Dataのインスタンス化
-
-            //フォント読み込み
-            FoD.Load_Font();
-
-            //R_UILibの初期化
-            RUI.R_UILibInit();
 
             //コントロール
             GameControlHandle = "GameMain";
@@ -85,13 +75,13 @@ namespace R_RPG.Game_Scene
                     //操作
                     if (C_GameEscMenu.CGameEscMenu() == 1)
                     {
-                        return;
+                        return 0;
                     }
                 }
 
 
             }
-            if (DX.ProcessMessage() == -1)
+            if (DX.ProcessMessage() != 0)
             {
                 // 主にウィンドウが閉じられたとき実行される
                 // データのセーブ等を実行
@@ -99,8 +89,9 @@ namespace R_RPG.Game_Scene
                 //Console.WriteLine("WindowExit");
                 //Console.ReadLine();
 
-                return;
+                return 1;
             }
+            return 1;
         }
     }
 }

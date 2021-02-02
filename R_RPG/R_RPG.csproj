@@ -66,6 +66,8 @@
     <Compile Include="Library\R_UILib\R_UILib.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Library\DxDLLW.cs" />
+    <Compile Include="Post_Init.cs" />
+    <Compile Include="Pre_Init.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="Game_Scene\Control\CharacterControl.cs" />
     <Compile Include="Game_Scene\Game_Draw_Main.cs" />

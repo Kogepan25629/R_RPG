@@ -11,13 +11,21 @@ namespace R_RPG
         /**/
         static void Main()
         {
-            //Dxlibの初期化
+            // Dxlibの初期化
             Dxlib_Init.Dxlib_Initialization();
 
-            //Menu画面
-            Menu_Scene.Menu_Main.Menu();
+            // Pre初期化
+            Pre_Init.PreInit();
 
-            //Dxlib終了処理
+
+            // Post初期化
+            Post_Init.PostInit();
+
+            // Menu画面
+            Menu_Scene.Menu_Main.Menu();
+                //Console.ReadLine();
+
+            // Dxlib終了処理
             DX.DxLib_End();
 
             //DxLibMain.Main_Test();
