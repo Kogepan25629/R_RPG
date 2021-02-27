@@ -22,5 +22,7 @@ namespace R_RPG
         //Dxlibで取得したキーの状態
         static public byte[] KeyState = new byte[256];
         static public byte[] KeyStateOld = new byte[256];
+
+        static public string GameDataPath;
     }
 }

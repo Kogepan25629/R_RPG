@@ -12,14 +12,14 @@ namespace R_RPG
         static void Main()
         {
             // Dxlibの初期化
-            Dxlib_Init.Dxlib_Initialization();
+            Init.Dxlib_Init.Dxlib_Initialization();
 
             // Pre初期化
-            Pre_Init.PreInit();
+            Init.Pre_Init.PreInit();
 
 
             // Post初期化
-            Post_Init.PostInit();
+            Init.Post_Init.PostInit();
 
             // Menu画面
             Menu_Scene.Menu_Main.Menu();
