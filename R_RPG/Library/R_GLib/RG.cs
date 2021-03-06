@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Version 1.0.0
+
+using System;
 
 namespace R_GeneralLib
 {
@@ -6,9 +8,9 @@ namespace R_GeneralLib
     {
         // 定数
         public const byte INFO = 0;
-        public const byte NORMAL = 1;
-        public const byte WARM = 2;
-        public const byte ERROR = 3;
+        public const byte WARM = 1;
+        public const byte ERROR = 2;
+        public const byte NONE = 3;
 
         //変数
         private static byte OutputLogLevel = INFO;
@@ -16,13 +18,13 @@ namespace R_GeneralLib
         // コンソール出力のレベル変更(ERROR, WARM, NORMAL, NONE)
         public static void ChangeOutputLogLevel(byte outputLogLevel)
         {
-            if (outputLogLevel == INFO || outputLogLevel == ERROR || outputLogLevel == NORMAL || outputLogLevel == NORMAL) {
+            if (outputLogLevel == INFO || outputLogLevel == WARM || outputLogLevel == ERROR || outputLogLevel == NONE) {
                 OutputLogLevel = outputLogLevel;
             }
         }
 
         // コンソール出力関数
-        public static void OutputLog(string str, byte outputLogLevel = NORMAL, bool enableTime = true)
+        public static void OutputLog(string str, byte outputLogLevel = INFO, bool enableTime = true)
         {
             if (outputLogLevel >= OutputLogLevel) {
                 //時間表示
