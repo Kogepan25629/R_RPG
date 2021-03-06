@@ -7,6 +7,9 @@ namespace R_RPG.Init
     {
         public static void PostInit()
         {
+            // Log
+            R_GeneralLib.RG.OutputLog("Post Initializing...");
+
             //テクスチャ読み込み
             Game_Scene.Tile_Data.TileData();
             Graphic_Data.Graphic_Data_Load();
@@ -17,9 +20,8 @@ namespace R_RPG.Init
             //R_UILibの初期化
             RUI.R_UILibInit();
 
-            if (Setting.Setting_EnableSystemLog == true) {
-                R_GeneralLib.RG.OutputLog("Post Initialized");
-            }
+            // Log
+            R_GeneralLib.RG.OutputLog("Post Initialized");
         }
     }
 }

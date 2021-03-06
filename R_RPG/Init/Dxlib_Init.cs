@@ -11,6 +11,9 @@ namespace R_RPG.Init
 
         static public void Dxlib_Initialization()
         {
+            // Log
+            R_GeneralLib.RG.OutputLog("Dxlib Initializing...");
+
             //Dxlib　前処理
             {
                 int tekitou;
@@ -64,9 +67,8 @@ namespace R_RPG.Init
 
             DX.SetMouseDispFlag(DX.TRUE);
 
-            if (Setting_EnableSystemLog == true) {
-                R_GeneralLib.RG.OutputLog("Dxlib Initialized");
-            }
+            // Log
+            R_GeneralLib.RG.OutputLog("Dxlib Initialized");
         }
     }
 }
