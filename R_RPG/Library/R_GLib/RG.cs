@@ -1,4 +1,4 @@
-﻿//Version 1.0.0
+﻿//Version 1.1.0
 
 using System;
 
@@ -30,7 +30,21 @@ namespace R_GeneralLib
                 //時間表示
                 if (enableTime == true) {
                     DateTime dt = DateTime.Now;
-                    Console.Write("[" + dt.Hour + ":" + dt.Minute + ":" + dt.Second + "]");
+
+                    // 各桁が1桁の場合先頭に0をつける
+                    string hour = dt.Hour.ToString();
+                    string minute = dt.Minute.ToString();
+                    string second = dt.Second.ToString();
+                    if (hour.Length == 1) {
+                        hour = "0" + hour;
+                    }else if(minute.Length == 1) {
+                        minute = "0" + minute;
+                    }
+                    else if(second.Length == 1) {
+                        second = "0" + second;
+                    }
+
+                    Console.Write("[" + hour + ":" + minute + ":" + second + "]");
                 }
 
                 // modeに応じて文字列の色を変更
