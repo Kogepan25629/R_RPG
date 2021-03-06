@@ -11,12 +11,11 @@ namespace R_RPG
         /**/
         static void Main()
         {
-            // Dxlibの初期化
-            Init.Dxlib_Init.Dxlib_Initialization();
-
             // Pre初期化
             Init.Pre_Init.PreInit();
 
+            // Dxlibの初期化
+            Init.Dxlib_Init.Dxlib_Initialization();
 
             // Post初期化
             Init.Post_Init.PostInit();
