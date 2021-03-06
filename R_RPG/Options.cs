@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using R_GLib;
+using R_GeneralLib;
 
 namespace R_RPG
 {
+    /*
     class Options
     {
+        
         //// PUBLIC
         // オプションを読み込み各データを設定する
         public static void LoadOptions()
@@ -18,11 +20,13 @@ namespace R_RPG
             if (Setting.Setting_EnableLoadOptionsFile == true) {
                 LoadOptionsFile();    // option.txt から読み込み
                 SaveOptionsFile();    // 読み込んだ値をoption.txtに書き込み 余計な文字列が消される
+                bool aho = GetOptionsValue<int>("UIScale");
             }
-
+            
             foreach (KeyValuePair<string, object[]> item in OptionsValue) {
                 Console.WriteLine(item.Key + "=" + GetOptionsValue<string>(item.Key));
             }
+            
         }
 
 
@@ -100,7 +104,7 @@ namespace R_RPG
                 return default;
             }
             catch (System.Collections.Generic.KeyNotFoundException) {
-                RG.OutputLog("[メソッド:GetOptionsValue] OptionsValueに対して対応するKeyが存在しない", true, RG.ERROR);
+                RG.OutputLog("[メソッド:GetOptionsValue] OptionsValueに対して対応するKeyが存在しません", true, RG.ERROR);
                 return default;
             }
         }
@@ -210,4 +214,5 @@ namespace R_RPG
             RG.OutputLog("Created options.txt");
         }
     }
+    */
 }

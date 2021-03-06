@@ -11,10 +11,10 @@ namespace R_RPG.Init
     {
         public static void PreInit()
         {
-            Options.LoadOptions();
+            //Options.LoadOptions();
 
             if (Setting.Setting_EnableSystemLog == true) {
-                R_GLib.RG.OutputLog("Pre Initialized");
+                R_GeneralLib.RG.OutputLog("Pre Initialized");
             }
         }
     }

@@ -18,7 +18,7 @@ namespace R_RPG.Init
             RUI.R_UILibInit();
 
             if (Setting.Setting_EnableSystemLog == true) {
-                R_GLib.RG.OutputLog("Post Initialized");
+                R_GeneralLib.RG.OutputLog("Post Initialized");
             }
         }
     }

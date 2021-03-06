@@ -65,7 +65,7 @@ namespace R_RPG.Init
             DX.SetMouseDispFlag(DX.TRUE);
 
             if (Setting_EnableSystemLog == true) {
-                R_GLib.RG.OutputLog("Dxlib Initialized");
+                R_GeneralLib.RG.OutputLog("Dxlib Initialized");
             }
         }
     }
