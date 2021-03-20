@@ -27,19 +27,17 @@ namespace R_RPG.Game_Scene
             int ButtonPositionY = (int)(GeD.Window_Heigt * 0.2 + ButtonHeight1);
 
             // ボタンのインスタンスを生成
-            Button1 = new RUI_Button();
-            Button2 = new RUI_Button();
-            Button3 = new RUI_Button();
-            Button4 = new RUI_Button();
+            Button1 = new RUI_Button(false, true);
+            Button2 = new RUI_Button(false, true);
+            Button3 = new RUI_Button(false, true);
+            Button4 = new RUI_Button(false, true);
             // Button1
             Button1.SetPoint(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1);
-            Button1.Mode = 3;
             Button1.SetString("設定", FoD.TestFont);
             Button1.GrHandle = Graphic_Data.GraphicData["Black"];
             // Button2
             ButtonPositionX = ButtonPositionX + DrawSpaceX + ButtonWidth1;
             Button2.SetPoint(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1);
-            Button2.Mode = 3;
             Button2.SetString("実績", FoD.TestFont);
             Button2.GrHandle = Graphic_Data.GraphicData["Black"];
             // Button3
@@ -47,13 +45,11 @@ namespace R_RPG.Game_Scene
             ButtonPositionY += ButtonHeight1 + DrawSpaceY;
             ButtonWidth1 += ButtonWidth1 + DrawSpaceX;
             Button3.SetPoint(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1);
-            Button3.Mode = 3;
             Button3.SetString("ゲームに戻る", FoD.TestFont);
             Button3.GrHandle = Graphic_Data.GraphicData["Black"];
             //Button4
             ButtonPositionY += ButtonHeight1 + DrawSpaceY;
             Button4.SetPoint(ButtonPositionX, ButtonPositionY, ButtonPositionX + ButtonWidth1, ButtonPositionY + ButtonHeight1);
-            Button4.Mode = 3;
             Button4.SetString("ゲームを終了", FoD.TestFont);
             Button4.GrHandle = Graphic_Data.GraphicData["Black"];
         }
@@ -105,16 +101,16 @@ namespace R_RPG.Game_Scene
                 Button4.Show();
 
                 // ボタンのクリック判定
-                if (Button1.LeftUpDetection() == true){
+                if (Button1.DetectMouseClick(RUI.LEFT, RUI.UP) == true){
                     return 1;
                 }
-                if (Button2.LeftUpDetection() == true){
+                if (Button2.DetectMouseClick(RUI.LEFT, RUI.UP) == true){
                     return 2;
                 }
-                if (Button3.LeftUpDetection() == true){
+                if (Button3.DetectMouseClick(RUI.LEFT, RUI.UP) == true){
                     return 3;
                 }
-                if (Button4.LeftUpDetection() == true) {
+                if (Button4.DetectMouseClick(RUI.LEFT, RUI.UP) == true) {
                     return 4;
                 }
                 return 0;

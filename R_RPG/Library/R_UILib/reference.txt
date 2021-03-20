@@ -1,47 +1,57 @@
-﻿R_UILib	   Version 0.3.3
+﻿R_UILib	   Version 0.5.1
 
 各クラスと関数の説明
 
 RUI クラス
+定数
+                    int    RIGHT
+                    int    LEFT
+                    int    UP
+                    int    DOWN
+                    int    HOLD
+
 関数                void R_UILibInit()
 
-                    R_UILibの初期化を行う最初に一回実行する必要がある	
+                    説明   R_UILibの初期化を行う最初に一回実行する必要がある	
 
 
                     void UptadeMouseState()
 
-                    マウス座標の取得やクリック判定を行う
-                    基本毎フレームの最初に呼び出す関数
+                    説明   マウス座標の取得やクリック判定を行う
+                           基本毎フレームの最初に呼び出す関数
 
 
 RUI_Button クラス
 説明                基本的なボタンの用のクラス
-                    Mode 1 : 文字列の長さに応じてX2, Y2の値を設定し、ボタンのサイズを文字列のサイズに合わせる。
-                    Mode 2 : ボタンの上にカーソルがある状態で画像を変更する。
-                    Mode 3 : ボタンの上にカーソルがある状態で画像をハイライトする。
-                    Mode 4 : Mode1 と Mode2
-                    Mode 5 : Mode1 と Mode3
+                    インスタンス化して使用
 
-フィールド          int    Mode         ボタンのモード                                          初期値 0
-                    int    X1           ボタン左上のX座標                                       初期値 -1
-                    int    X2           ボタン右下のX座標                                       初期値 -1
-                    int    Y1           ボタン左上のY座標                                       初期値 -1
-                    int    Y2           ボタン右下のY座標                                       初期値 -1
-                    int    GrHandle     DXLibのグラフィックハンドル                             初期値 -1
-                    itn    GrHandle2    Mode2,4用のグラフィックハンドル                         初期値 -1
-                    int    FontHandle   DXLibのフォントハンドル                                 初期値 -1
-                    string Str          ボタンに表示する文字列                                  初期値 ""
-                    uint   StrColor     ボタンに表示する文字列の色                              初期値 (255, 255, 255)
+コンストラクタ引数  bool   matchSizeToString    ボタンのサイズを文字列の大きさにあわせるかどうか
+                    bool   onCursorHighlight    ボタン上にカーソルがある時ハイライトするかどうか
+                    bool   onCursorChangeImage  ボタン上にカーソルがある時GrHandle2に設定された画像を表示するかどうか
+
+フィールド          変数
+                    int    X1                   ボタン左上のX座標                                       初期値 -1
+                    int    X2                   ボタン右下のX座標                                       初期値 -1
+                    int    Y1                   ボタン左上のY座標                                       初期値 -1
+                    int    Y2                   ボタン右下のY座標                                       初期値 -1
+                    int    GrHandle             DXLibのグラフィックハンドル                             初期値 -1
+                    int    GrHandle2            Mode2,4用のグラフィックハンドル                         初期値 -1
+                    int    FontHandle           DXLibのフォントハンドル                                 初期値 -1
+                    string Str                  ボタンに表示する文字列                                  初期値 ""
+                    uint   StrColor             ボタンに表示する文字列の色                              初期値 DX.GetColor(255, 255, 255)
+
 
 関数                int SetString(string str)
+                    int SetString(string str, int fontHandle)
 
-                    引数   string str   設定する文字列
+                    引数   string str        Strに設定する文字列
+                           int fontHandle    FontHandleに設定する文字列
 
                     戻り値   0 : 成功
                             -1 : 失敗
 
                     説明    ボタンに表示する文字列を設定する
-                            Modeが1か3のとき文字列の長さに応じてX2, Y2の値を設定し、ボタンのサイズを文字列のサイズに合わせる。
+                            FontHandleが設定されておらず、引数にfonthandleを指定しなかった場合は-1を返す
 
 
                     void SetPoint(int x1, int y1)
@@ -52,4 +62,24 @@ RUI_Button クラス
                            int x2    ボタンの右下座標
                            int y2    ボタンの右下座標
 
-                    説明    ボタンの座標をまとめて設定できる。
+                    説明   ボタンの座標をまとめて設定できる
+
+
+                    int Show()
+
+                    引数   なし
+                     
+                    説明   画像と文字列を描画する
+                           座標が設定されていない場合は-1を返す
+                           matchSizeToStringがtrueかつ文字列が設定されていない場合は-1を返す
+                           onCursorChangeImageがtrueかつGrHandle2が設定されていない場合は描画されず-1を返す
+
+
+                    bool DetectMouseClick(int LeftRight, int UpDown)
+
+                    引数   int LeftRight     RUI.RIGHT  RUI.LEFT のどちらかを指定
+                           int UpDown        RUI.DOWN  RUI.UP  RUI.HOLD のどれかを指定
+
+                    説明   ボタンがマウスクリックされた場合trueされていない場合はfalseを返す
+                           LeftRightには右クリックと左クリックのどちらで判定するか指定
+                           UpDownにDOWNを指定した場合はクリックダウンした瞬間、UPの場合はクリックアップした瞬間、HOLDの場合はクリックされているときにtrueを返す
